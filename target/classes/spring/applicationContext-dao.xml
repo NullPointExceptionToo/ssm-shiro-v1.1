@@ -7,70 +7,70 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<!-- 该配置文件是 Dao 层的配置文件，实现了 Spring 与 MyBatis 框架的整合 -->
+	<!-- 该配置文件是 Dao 层的配置文件，实现了 Spring �? MyBatis 框架的整�? -->
 
-	<!-- 1、将数据库连接参数化， 建议键值带 jdbc. 前缀，否则如果使用 username ，Spring 框架会优先使用系统变量 username 
-		而不会使用我们在配置文件中使用的键 username -->
+	<!-- 1、将数据库连接参数化�? 建议键�?�带 jdbc. 前缀，否则如果使�? username ，Spring 框架会优先使用系统变�? username 
+		而不会使用我们在配置文件中使用的�? username -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
 
-	<!-- 配置数据源 -->
+	<!-- 配置数据�? -->
 	<!-- 使用的数据库连接池产品是 Driud -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
 		<!-- 数据源驱动类可不写， Druid 默认会自动根据URL识别DriverClass -->
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<!-- 基本属性 url、user、password -->
+		<!-- 基本属�?? url、user、password -->
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 
-		<!-- 配置初始化大小、最小、最大 -->
+		<!-- 配置初始化大小�?�最小�?�最�? -->
 		<property name="initialSize" value="${jdbc.pool.init}" />
 		<property name="minIdle" value="${jdbc.pool.minIdle}" />
 		<property name="maxActive" value="${jdbc.pool.maxActive}" />
 
-		<!-- 配置获取连接等待超时的时间 -->
+		<!-- 配置获取连接等待超时的时�? -->
 		<property name="maxWait" value="60000" />
 
-		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<!-- 配置间隔多久才进行一次检测，�?测需要关闭的空闲连接，单位是毫秒 -->
 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
 
-		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<!-- 配置�?个连接在池中�?小生存的时间，单位是毫秒 -->
 		<property name="minEvictableIdleTimeMillis" value="300000" />
 
-		<property name="validationQuery" value="${jdbc.testSql}" /><!--用来检测连接是否有效的sql，要求是一个查询语句。 -->
-		<property name="testWhileIdle" value="true" /><!--申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->
-		<property name="testOnBorrow" value="false" /><!--申请连接时执行validationQuery检测连接是否有效， -->
-		<property name="testOnReturn" value="false" /><!--归还连接时执行validationQuery检测连接是否有效， -->
+		<property name="validationQuery" value="${jdbc.testSql}" /><!--用来�?测连接是否有效的sql，要求是�?个查询语句�?? -->
+		<property name="testWhileIdle" value="true" /><!--申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery�?测连接是否有效�?? -->
+		<property name="testOnBorrow" value="false" /><!--申请连接时执行validationQuery�?测连接是否有效， -->
+		<property name="testOnReturn" value="false" /><!--归还连接时执行validationQuery�?测连接是否有效， -->
 
-		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用） <property name="poolPreparedStatements" 
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用�? <property name="poolPreparedStatements" 
 			value="true" /> <property name="maxPoolPreparedStatementPerConnectionSize" 
 			value="20" /> -->
 		<property name="filters" value="stat" /><!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
 	</bean>
 
-	<!-- MyBatis 集成 Spring 必须配置的项 1 、配置 SqlSessionFactory 实例 -->
+	<!-- MyBatis 集成 Spring 必须配置的项 1 、配�? SqlSessionFactory 实例 -->
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
-		<!-- 注入数据源 -->
+		<!-- 注入数据�? -->
 		<property name="dataSource" ref="dataSource" />
 		<!-- 配置 MyBatis 全局配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<!-- 配置pojo别名 -->
 		<property name="typeAliasesPackage" value="com.yutons.shiro.bean" />
-		<!-- 扫描 sql 配置文件，即 mapper 对应的 xml 文件 -->
+		<!-- 扫描 sql 配置文件，即 mapper 对应�? xml 文件 -->
 		<!-- <property name="mapperLocations" value="classpath:mappers/*.xml"/> -->
-		<!-- 扫描 entity 包，这样在 mapper 中就可以使用简单类名，多个用 ; 隔开 -->
+		<!-- 扫描 entity 包，这样�? mapper 中就可以使用�?单类名，多个�? ; 隔开 -->
 		<!-- <property name="typeAliasesPackage" value="com/yutons/shiro/model"/> -->
 	</bean>
 	<!-- MyBatis 集成 Spring 必须配置的项 2，可以不配置 id -->
-	<!-- 配置 1：原始Dao开发 接口实现类 Mapper.xml 三个 2：接口开发 接口 不写实现类 Mapper.xml 二个 （UserDao、ProductDao 
-		、BrandDao。。。。。。。） 3：接口开发、并支持扫描 com.yutons.shiroUserDao。。。。。）
-		写在此包下即可被扫描到 -->
+	<!-- 配置 1：原始Dao�?�? 接口实现�? Mapper.xml 三个 2：接口开�? 接口 不写实现�? Mapper.xml 二个 （UserDao、ProductDao 
+		、BrandDao。�?��?��?��?��?��?�） 3：接口开发�?�并支持扫描 com.yutons.shiroUserDao。�?��?��?��?�）
+		写在此包下即可被扫描�? -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 给出须要被扫描的 Dao 接口 -->
 		<property name="basePackage" value="com.yutons.shiro.dao" />
 		<!-- 注入 SqlSessionFactory -->
-		<!-- 这是推荐配置的项，不要去配置 sqlSessionFactory ，已经被弃用了 -->
+		<!-- 这是推荐配置的项，不要去配置 sqlSessionFactory ，已经被弃用�? -->
 		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" 
 			/> -->
 	</bean>

@@ -9,56 +9,56 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-    <!-- 缓存管理器 使用Ehcache实现 begin -->
-    <!-- 配置 Spring 的 EhCacheCacheManager,须要 spring-context-support 的支持 -->
+    <!-- 缓存管理�? 使用Ehcache实现 begin -->
+    <!-- 配置 Spring �? EhCacheCacheManager,须要 spring-context-support 的支�? -->
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
         <property name="cacheManager" ref="ehCacheManagerFactoryBean"/>
     </bean>
 
-    <!-- 配置 Spring 的 EhCacheManagerFactoryBean ,须要 spring-context-support 的支持 -->
+    <!-- 配置 Spring �? EhCacheManagerFactoryBean ,须要 spring-context-support 的支�? -->
     <bean id="ehCacheManagerFactoryBean"
           class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache.xml"/>
     </bean>
-    <!-- 缓存管理器 使用Ehcache实现 end -->
-    <!-- 凭证匹配器 begin-->
-    <!-- 声明一个密码匹配器 -->
+    <!-- 缓存管理�? 使用Ehcache实现 end -->
+    <!-- 凭证匹配�? begin-->
+    <!-- 声明�?个密码匹配器 -->
     <bean id="credentialsMatcher"
           class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
         <!-- 设置该密码匹配器使用的算法是 md5 -->
         <property name="hashAlgorithmName" value="md5"/><!--指定hash算法为MD5;-->
-        <!--<property name="hashIterations" value="2"/>&lt;!&ndash;指定散列次数为2次&ndash;&gt;
+        <!--<property name="hashIterations" value="2"/>&lt;!&ndash;指定散列次数�?2�?&ndash;&gt;
         <property name="storedCredentialsHexEncoded" value="true"/>&lt;!&ndash;指定Hash散列值使用Hex加密存储;value="false"表明hash散列值用用Base64-encoded存储.&ndash;&gt;
         &lt;!&ndash;详见http://blog.csdn.net/lookthatgirl/article/details/37593869&ndash;&gt;-->
     </bean>
-    <!-- 凭证匹配器 end-->
+    <!-- 凭证匹配�? end-->
     <!-- 自定义一个权限匹配器 begin -->
     <bean id="permissionResolver" class="com.yutons.shiro.shiro.permission.UrlPermissionResolver"/>
     <!-- 自定义一个权限匹配器 end -->
     <!-- Realm实现 begin-->
-    <!-- 声明一个自定义的 Realm -->
+    <!-- 声明�?个自定义�? Realm -->
     <bean id="myRealm" class="com.yutons.shiro.shiro.realm.MyRealm">
-        <!-- 将上面声明的密码匹配器注入到自定义 Realm 的属性中去 -->
+        <!-- 将上面声明的密码匹配器注入到自定�? Realm 的属性中�? -->
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
-        <!-- 将自定义的权限匹配器注入到自定义 Realm 中 -->
+        <!-- 将自定义的权限匹配器注入到自定义 Realm �? -->
         <property name="permissionResolver" ref="permissionResolver"/>
 
         <!-- 配置缓存相关 -->
         <!-- 启用缓存 -->
         <property name="cachingEnabled" value="true"/>
-        <!-- 开启认证缓存 -->
+        <!-- �?启认证缓�? -->
         <property name="authenticationCachingEnabled" value="true"/>
-        <!-- 指定认证缓存的名字(与 ehcache.xml 中声明的相同) -->
+        <!-- 指定认证缓存的名�?(�? ehcache.xml 中声明的相同) -->
         <property name="authenticationCacheName" value="shiro-authenticationCache"/>
-        <!--开启授权缓存 -->
+        <!--�?启授权缓�? -->
         <property name="authorizationCachingEnabled" value="true"/>
-        <!-- 指定授权缓存的名字(与 ehcache.xml 中声明的相同) -->
+        <!-- 指定授权缓存的名�?(�? ehcache.xml 中声明的相同) -->
         <property name="authorizationCacheName" value="shiro-authorizationCache"/>
     </bean>
     <!-- Realm实现 end-->
 
     <!--回话管理 begin-->
-    <!-- 会话ID生成器 -->
+    <!-- 会话ID生成�? -->
     <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
 
     <!-- 会话Cookie模板 -->
@@ -71,11 +71,11 @@
     <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
         <constructor-arg value="rememberMe"/>
         <property name="httpOnly" value="true"/>
-        <property name="maxAge" value="2592000"/><!-- 30天 -->
+        <property name="maxAge" value="2592000"/><!-- 30�? -->
     </bean>
-    <!-- rememberMe管理器 -->
+    <!-- rememberMe管理�? -->
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
-        <!-- rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位）-->
+        <!-- rememberMe cookie加密的密�? 建议每个项目都不�?�? 默认AES算法 密钥长度�?128 256 512 位）-->
         <property name="cipherKey"
                   value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
         <property name="cookie" ref="rememberMeCookie"/>
@@ -86,13 +86,13 @@
         <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
     </bean>
 
-    <!-- 会话验证调度器 -->
+    <!-- 会话验证调度�? -->
     <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
         <property name="sessionValidationInterval" value="1800000"/>
         <property name="sessionManager" ref="sessionManager"/>
     </bean>
 
-    <!-- 会话管理器 -->
+    <!-- 会话管理�? -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <property name="globalSessionTimeout" value="1800000"/>
         <property name="deleteInvalidSessions" value="true"/>
@@ -119,13 +119,13 @@
     </bean>
 
 
-    <!-- 配置 shiro 的 ehcache 缓存相关,这个缓存只和 Realm 相关 begin -->
-    <!--重写EhCacheManager,关闭流-->
+    <!-- 配置 shiro �? ehcache 缓存相关,这个缓存只和 Realm 相关 begin -->
+    <!--重写EhCacheManager,关闭�?-->
     <!--<bean id="ehCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager"></bean>-->
     <bean id="ehCacheManager" class="com.yutons.shiro.shiro.cache.EhCacheManager"></bean>
-    <!-- 配置 shiro 的 ehcache 缓存相关,这个缓存只和 Realm 相关 end -->
+    <!-- 配置 shiro �? ehcache 缓存相关,这个缓存只和 Realm 相关 end -->
 
-    <!-- 配置安全管理器 begin -->
+    <!-- 配置安全管理�? begin -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- 设置安全管理器的安全数据源为自定义的 Realm -->
         <property name="realm" ref="myRealm"/>
@@ -133,17 +133,17 @@
         <property name="sessionManager" ref="sessionManager"/>
         <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
-    <!-- 配置安全管理器 end-->
-    <!-- 声明一个自定义的过滤器 begin -->
+    <!-- 配置安全管理�? end-->
+    <!-- 声明�?个自定义的过滤器 begin -->
     <bean id="resourceCheckFilter" class="com.yutons.shiro.shiro.filter.PermissionCheckFilter">
-        <!-- 为上面声明的自定义过滤器注入属性值 -->
+        <!-- 为上面声明的自定义过滤器注入属�?��?? -->
         <property name="errorUrl" value="/unAuthorization"/>
     </bean>
-    <!-- 声明一个自定义的过滤器 end -->
-    <!-- Shiro的Web过滤器 begin-->
+    <!-- 声明�?个自定义的过滤器 end -->
+    <!-- Shiro的Web过滤�? begin-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <!-- 如果认证不通过,浏览器通过 Get 方式请求到 /login 上 -->
+        <!-- 如果认证不�?�过,浏览器�?�过 Get 方式请求�? /login �? -->
         <property name="loginUrl" value="/login"/>
         <property name="unauthorizedUrl" value="/unAuthorization"/>
         <property name="filters">
@@ -159,8 +159,8 @@
             </value>
         </property>
     </bean>
-    <!-- Shiro的Web过滤器 end-->
-    <!-- Shiro生命周期处理器 begin-->
+    <!-- Shiro的Web过滤�? end-->
+    <!-- Shiro生命周期处理�? begin-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-    <!-- Shiro生命周期处理器 end-->
+    <!-- Shiro生命周期处理�? end-->
 </beans>

@@ -125,7 +125,7 @@
         WHERE
         t_permission.id != 1
         AND t_permission.id != 2
-        and t_permission.parantid%1000=0 /*只保留顶级菜单和一级菜单*/
+        and t_permission.parantid%1000=0 /*只保留顶级菜单和�?级菜�?*/
     </select>
     <update id="updatePermissionById">
         <!---->

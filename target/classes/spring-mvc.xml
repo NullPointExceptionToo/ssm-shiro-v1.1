@@ -16,15 +16,15 @@
     <task:executor id="executor" pool-size="3"/>
     <task:scheduler id="scheduler" pool-size="3"/>
     <task:annotation-driven executor="executor" scheduler="scheduler"/>
-    <!-- 配置处理器映射器 适配器 -->
+    <!-- 配置处理器映射器 适配�? -->
     <mvc:annotation-driven/>
-    <!-- enable autowire 向容器自动注册 -->
+    <!-- enable autowire 向容器自动注�? -->
     <context:annotation-config/>
     <!-- 对静态资源文件的访问 -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
-    <!-- 配置扫描 器 -->
+    <!-- 配置扫描 �? -->
     <context:component-scan base-package="com.yutons.shiro.web;com.yutons.shiro.task"/>
-    <!-- 配置视图解释器 jsp -->
+    <!-- 配置视图解释�? jsp -->
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass"
