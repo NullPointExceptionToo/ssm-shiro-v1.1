@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.ProductDao">
+    <select id="findByProductId" resultType="product">
+        <!---->
+        SELECT
+        pid,
+        productName,
+        productTypeID,
+        productTypeName,
+        productDes
+        FROM
+        product
+        where pid = #{pid}
+    </select>
+    <select id="selectProductByCondition" resultType="product">
+        <!---->
+        SELECT
+        pid,
+        productName,
+        productTypeID,
+        productTypeName,
+        productDes
+        FROM
+        product
+        where 1=1
+        <if test="product.productTypeID != null and product.productTypeID != ''">
+           and product.productTypeID = #{product.productTypeID}
+        </if>
+        <if test="product.productName != null and product.productName != ''">
+           and product.productName = #{product.productName,jdbcType=VARCHAR}
+        </if>
+        <if test="product.pid != null and product.pid != ''">
+           and product.pid = #{product.pid}
+        </if>
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="product.pid">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `product` (
+        `productName`,
+        `productTypeID`,
+        `productTypeName`,
+        `productDes`
+        )
+        VALUES
+        (
+        #{product.productName},
+        #{product.productTypeID},
+        #{product.productTypeName},
+        #{product.productDes});
+    </insert>
+    <update id="update">
+        <!---->
+        UPDATE `product`
+        SET `productName` = #{product.productName},
+        `productTypeID` = #{product.productTypeID},
+        `productTypeName` = #{product.productTypeName},
+        `productDes` = #{product.productDes}
+        WHERE
+        (`pid` =${product.pid});
+    </update>
+    <delete id="deleteProductById">
+        <!---->
+        DELETE
+        FROM
+        product
+        WHERE
+        product.pid = #{product.pid}
+    </delete>
+</mapper>
+

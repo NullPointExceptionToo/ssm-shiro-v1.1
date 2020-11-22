@@ -19,15 +19,15 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/h-ui/skin/green/skin.css"
           id="skin"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/h-ui/css/style.css"/>
-    <title>ssm+shiro后台管理系统(权限控制)</title>
+    <title>农贸系统</title>
 </head>
 
 <body>
 <header class="navbar-wrapper">
     <div class="navbar navbar-fixed-top">
         <div class="container-fluid cl">
-            <a class="logo navbar-logo f-l mr-10 hidden-xs" href="javascript:;">ssm+shiro后台管理系统(权限控制)</a>
-            <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="javascript:;">后台管理系统(权限控制)</a>
+            <a class="logo navbar-logo f-l mr-10 hidden-xs" href="javascript:;">农贸系统</a>
+            <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="javascript:;">农贸系统</a>
             <span class="logo navbar-slogan f-l mr-10 hidden-xs"></span>
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;"
                onclick="showAllBtn()">&#xe667;</a>

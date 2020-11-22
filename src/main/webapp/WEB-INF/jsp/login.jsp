@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>ssm+shiro后台管理系统(权限控制)</title>
+    <title>农贸系统</title>
     <link rel="Bookmark" href="${pageContext.request.contextPath}/resources/image/favicon.ico">
     <link rel="Shortcut Icon" href="${pageContext.request.contextPath}/resources/image/favicon.ico"/>
     <link href="${pageContext.request.contextPath}/resources/login/css/style.css" type="text/css" rel="stylesheet"/>
@@ -17,7 +17,7 @@
 <body>
 <div class="wrap">
     <div class="logo">
-        <span class="logo-sub">ssm+shiro后台管理系统(权限控制)</span>
+        <span class="logo-sub">农贸系统</span>
     </div>
     <div class="banner-show" id="js_ban_content" style="margin-top: 5px;">
 
