@@ -27,19 +27,19 @@ public class Store extends PageBean implements Serializable {
     /**
      * 商店名称
      */
-    protected String sName;
+    protected String storeName;
     /**
      * 商店负责人id
      */
-    protected Integer sUserId;
+    protected Integer storeUserId;
     /**
      * 商店负责人名
      */
-    protected String sUserName;
+    protected String storeUserName;
     /**
      * 商店地址
      */
-    protected String sAdds;
+    protected String storeAdds;
     /**
      * 商店状态
      */

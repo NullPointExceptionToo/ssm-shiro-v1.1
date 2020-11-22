@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.HomeDao">
+    <select id="findByHomeId" resultType="home">
+        <!---->
+        SELECT
+        homeId,
+        homeName,
+        homeAdds,
+        homeUserId,
+        homeUserName,
+        status,
+        statusDsc
+        FROM
+        home
+        where homeId = #{homeId}
+    </select>
+    <select id="selectHomeByCondition" resultType="home">
+        <!---->
+        SELECT
+        homeId,
+        homeName,
+        homeAdds,
+        homeUserId,
+        homeUserName,
+        status,
+        statusDsc
+        FROM
+        home
+        where 1=1
+        <if test="home.homeName != null and home.homeName!= ''">
+           and home.homeName = #{home.homeName,jdbcType=VARCHAR}
+        </if>
+        <if test="home.homeUserId != null and home.homeUserId != ''">
+           and home.homeUserId = #{home.homeUserId}
+        </if>
+        <if test="home.status != null and home.status != ''">
+           and home.status = #{home.status}
+        </if>
+        <if test="home.homeId != null and home.homeId != ''">
+           and home.homeId = #{home.homeId}
+        </if>
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="home.homeId">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `home` (
+        `homeName`,
+        `homeAdds`,
+        `homeUserId`,
+        `homeUserName`,
+        `status`,
+        `statusDsc`
+        )
+        VALUES
+        (
+        #{home.homeName},
+        #{home.homeAdds},
+        #{home.homeUserId},
+        #{home.homeUserName},
+        #{home.status},
+        #{home.statusDsc});
+    </insert>
+    <update id="update">
+        <!---->
+        UPDATE `home`
+        SET `homeName` = #{home.homeName},
+        `homeAdds` = #{home.homeAdds},
+        `homeUserId` = #{home.homeUserId},
+        `homeUserName` = #{home.homeUserName},
+        `status` = #{home.status},
+        `statusDsc` = #{home.statusDsc}
+        WHERE
+        (`homeId` =${home.homeId});
+    </update>
+    <update id="updateStatusById">
+        <!---->
+        UPDATE `home`
+        SET `status` = #{home.status},
+        `statusDsc` = #{home.statusDsc}
+        WHERE
+        (`homeId` =${home.homeId});
+    </update>
+    <delete id="deleteHomeById">
+        <!---->
+        DELETE
+        FROM
+        home
+        WHERE
+        home.homeId = #{home.homeId}
+    </delete>
+</mapper>
+

@@ -23,23 +23,23 @@ public class Home extends PageBean implements Serializable {
     /**
      * 基地ID
      */
-    protected Integer hId;
+    protected Integer homeId;
     /**
      * 基地名称
      */
-    protected String hName;
+    protected String homeName;
     /**
      * 基地地址
      */
-    protected String hAdds;
+    protected String homeAdds;
     /**
      * 基地负责人id
      */
-    protected Integer hUserId;
+    protected Integer homeUserId;
     /**
      * 基地负责人名
      */
-    protected String hUserName;
+    protected String homeUserName;
     /**
      * 基地状态
      */

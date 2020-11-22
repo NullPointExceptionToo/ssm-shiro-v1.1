@@ -137,7 +137,7 @@ public class ProductController {
     }
     private Boolean checkProductName(Product product){
     	List<Product> proList = productService.selectProductByName(product.getProductName());
-        if (proList == null && proList.size() != 0) {
+        if (proList == null || proList.size() == 0) {
         	return true;
         }
         List<Product> oldList = productService.selectProductById(product.getPid());

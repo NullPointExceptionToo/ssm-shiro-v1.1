@@ -47,7 +47,7 @@ public class ProOrder extends PageBean implements Serializable {
     /**
      * 商品名称
      */
-    protected String pName;
+    protected String proName;
     /**
      * 已销数量
      */

@@ -257,4 +257,10 @@ public class UserServiceImpl implements UserService {
     public List<Integer> selectRoleIdByUserId(Integer id) {
         return userDao.selectRoleIdByUserId(id);
     }
+
+	@Override
+	public List<User> findUserByRid(Integer roleId) {
+		
+		return userDao.findUserByRid(roleId);
+	}
 }

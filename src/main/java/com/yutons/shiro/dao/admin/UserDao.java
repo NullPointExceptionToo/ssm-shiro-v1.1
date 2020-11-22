@@ -15,6 +15,13 @@ public interface UserDao {
      * @return
      */
     User findByUserName(@Param("username") String username);
+    /**
+     * 根据角色获取用户（正常状态）
+     *
+     * @param roleId
+     * @return
+     */
+    List<User> findUserByRid(@Param("roleId") Integer roleId);
 
     /**
      * 根据用户id查询权限

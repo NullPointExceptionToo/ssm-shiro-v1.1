@@ -2,6 +2,8 @@ package com.yutons.shiro.service.admin;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.yutons.shiro.bean.admin.Permission;
 import com.yutons.shiro.bean.admin.User;
 import com.yutons.shiro.bean.admin.UserPage;
@@ -21,6 +23,13 @@ public interface UserService {
      * @return
      */
     User login(String username, String password);
+    /**
+     * 根据角色获取用户（正常状态）
+     *
+     * @param roleId
+     * @return
+     */
+    List<User> findUserByRid(Integer roleId);
 
     /**
      * 根据用户id查询权限列表
