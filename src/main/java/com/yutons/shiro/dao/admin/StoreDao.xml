@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.StoreDao">
+    <select id="findByStoreId" resultType="store">
+        <!---->
+        SELECT
+        sid,
+        storeName,
+        storeAdds,
+        storeUserId,
+        storeUserName,
+        status,
+        statusDsc
+        FROM
+        store
+        where sid = #{sid}
+    </select>
+    <select id="selectStoreByCondition" resultType="store">
+        <!---->
+        SELECT
+        sid,
+        storeName,
+        storeAdds,
+        storeUserId,
+        storeUserName,
+        status,
+        statusDsc
+        FROM
+        store
+        where 1=1
+        <if test="store.storeName != null and store.storeName!= ''">
+           and store.storeName = #{store.storeName,jdbcType=VARCHAR}
+        </if>
+        <if test="store.storeUserId != null and store.storeUserId != ''">
+           and store.storeUserId = #{store.storeUserId}
+        </if>
+        <if test="store.status != null and store.status != ''">
+           and store.status = #{store.status}
+        </if>
+        <if test="store.sid != null and store.sid != ''">
+           and store.sid = #{store.sid}
+        </if>
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="store.sid">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `store` (
+        `storeName`,
+        `storeAdds`,
+        `storeUserId`,
+        `storeUserName`,
+        `status`,
+        `statusDsc`
+        )
+        VALUES
+        (
+        #{store.storeName},
+        #{store.storeAdds},
+        #{store.storeUserId},
+        #{store.storeUserName},
+        #{store.status},
+        #{store.statusDsc});
+    </insert>
+    <update id="update">
+        <!---->
+        UPDATE `store`
+        SET `storeName` = #{store.storeName},
+        `storeAdds` = #{store.storeAdds},
+        `storeUserId` = #{store.storeUserId},
+        `storeUserName` = #{store.storeUserName},
+        `status` = #{store.status},
+        `statusDsc` = #{store.statusDsc}
+        WHERE
+        (`sid` =${store.sid});
+    </update>
+    <update id="updateStatusById">
+        <!---->
+        UPDATE `store`
+        SET `status` = #{store.status},
+        `statusDsc` = #{store.statusDsc}
+        WHERE
+        (`sid` =${store.sid});
+    </update>
+    <delete id="deleteStoreById">
+        <!---->
+        DELETE
+        FROM
+        store
+        WHERE
+        store.sid = #{store.sid}
+    </delete>
+</mapper>
+
