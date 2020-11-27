@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.ProOrderDao">
+    <select id="selectProOrdeById" resultType="proOrder">
+        <!---->
+        SELECT
+        po.oid,
+        po.proDate,
+        po.phomeID,
+        po.profarmer,
+        po.pid,
+        po.proNum,
+        po.sellNum,
+        po.ordStatus
+        FROM
+        proOrder po
+        where 1=1
+        <if test="proOrder.oid != null and proOrder.oid != ''">
+           and po.oid = #{proOrder.oid}
+        </if>
+    </select>
+    <select id="selectProOrdeByCondition" resultType="proOrder">
+        <!---->
+        SELECT
+        po.oid,
+        po.proDate,
+        po.phomeID,
+        h.homeName as phomeName,
+        po.profarmer,
+        po.pid,
+        p.productName as proName,
+        po.proNum,
+        po.sellNum,
+        po.ordStatus
+        FROM
+        proOrder po left join product p on po.pid = p.pid left join home h on po.phomeID = h.homeId
+        where 1=1
+        <if test="proOrder.oid != null and proOrder.oid != ''">
+           and po.oid = #{proOrder.oid}
+        </if>
+        <if test="proOrder.phomeID != null and proOrder.phomeID != ''">
+           and po.phomeID = #{proOrder.phomeID}
+        </if>
+        <if test="proOrder.userID != null and proOrder.userID != ''">
+           and h.homeUserId = #{proOrder.userID}
+        </if>
+        <if test="proOrder.pid != null and proOrder.pid != ''">
+           and po.pid = #{proOrder.pid}
+        </if>
+        <if test="proOrder.ordStatus != null and proOrder.ordStatus != ''">
+           and po.ordStatus = #{proOrder.ordStatus}
+        </if>
+    </select>
+    <!-- 分组统计商品库存 -->
+    <select id="selectGroupCount" resultType="com.yutons.shiro.bean.admin.ProductCount">
+        <!---->
+        SELECT
+        po.pid,
+        p.productName as proName,
+        sum(po.proNum) as proCount,
+        sum(po.sellNum)as sellCount,
+        (sum(po.proNum) - sum(po.sellNum)) as restCount
+        FROM
+        proOrder po left join product p on po.pid = p.pid left join home h on po.phomeID = h.homeId 
+        where 1=1
+        <if test="proOrder.phomeID != null and proOrder.phomeID != ''">
+           and po.phomeID = #{proOrder.phomeID}
+        </if>
+        <if test="proOrder.userID != null and proOrder.userID != ''">
+           and h.homeUserId = #{proOrder.userID}
+        </if>
+        group by po.pid,p.productName
+    </select>
+     <!-- 统计某种商品的库存-->
+    <select id="selectCountByType" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        (sum(po.proNum) - sum(po.sellNum))
+        FROM
+        proOrder po
+        where
+        po.pid = #{proOrder.pid}
+        <if test="proOrder.excludeId != null and proOrder.excludeId != ''">
+           and po.oid != #{proOrder.excludeId}
+        </if>
+    </select>
+    <!--搜索某一类商品的可用供货订单列表  -->
+    <select id="selectVailProOrdeByCondition" resultType="proOrder">
+        <!---->
+        SELECT
+        po.oid,
+        po.proNum,
+        po.sellNum,
+        po.ordStatus
+        FROM
+        proOrder po
+        where 1=1 and po.proNum > po.sellNum
+        <if test="proOrder.pid != null and proOrder.pid != ''">
+           and po.pid = #{proOrder.pid}
+        </if>
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="proOrder.oid">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `proOrder` (
+        `proDate`,
+        `phomeID`,
+        `profarmer`,
+        `pid`,
+        `proNum`,
+        `sellNum`,
+        `ordStatus`
+        )
+        VALUES
+        (
+        #{proOrder.proDate},
+        #{proOrder.phomeID},
+        #{proOrder.profarmer},
+        #{proOrder.pid},
+        #{proOrder.proNum},
+        #{proOrder.sellNum},
+        #{proOrder.ordStatus});
+    </insert>
+    <!-- <update id="update">
+        UPDATE `home`
+        SET `homeName` = #{home.homeName},
+        `homeAdds` = #{home.homeAdds},
+        `homeUserId` = #{home.homeUserId},
+        `homeUserName` = #{home.homeUserName},
+        `status` = #{home.status},
+        `statusDsc` = #{home.statusDsc}
+        WHERE
+        (`homeId` =${home.homeId});
+    </update> -->
+    <update id="updateStatusById">
+        <!---->
+        UPDATE `proOrder`
+        SET `ordStatus` = #{proOrder.ordStatus}
+        WHERE
+        (`oid` =${proOrder.oid});
+    </update>
+    <update id="updateSellNumById">
+        <!---->
+        UPDATE `proOrder`
+        SET `sellNum` = #{proOrder.sellNum}
+        WHERE
+        (`oid` =${proOrder.oid});
+    </update>
+    <delete id="deleteProOrderById">
+        <!---->
+        DELETE
+        FROM
+        proOrder
+        WHERE
+        proOrder.oid = #{proOrder.oid}
+    </delete>
+</mapper>
+

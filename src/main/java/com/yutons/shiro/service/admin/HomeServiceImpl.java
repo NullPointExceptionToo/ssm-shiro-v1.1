@@ -12,6 +12,7 @@ import com.yutons.shiro.bean.admin.Home;
 import com.yutons.shiro.bean.admin.ModulePage;
 import com.yutons.shiro.bean.admin.User;
 import com.yutons.shiro.dao.admin.HomeDao;
+import com.yutons.shiro.util.Constans;
 import com.yutons.shiro.util.TokenUtil;
 
 @Service
@@ -40,7 +41,7 @@ public class HomeServiceImpl implements HomeService {
 	public ModulePage<Home> selectHomesByPage() {
 		User user = TokenUtil.getUser();
 		Home home = new Home();
-		if (user.getRoleId() == 5) {
+		if (user.getRoleId() == Constans.homeRole) {
 			home.setHomeUserId(user.getUserId());
 		}
 		List<Home> data = homeDao.selectHomeByCondition(home);

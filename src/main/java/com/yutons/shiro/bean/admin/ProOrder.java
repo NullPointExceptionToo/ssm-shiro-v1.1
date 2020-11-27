@@ -33,6 +33,10 @@ public class ProOrder extends PageBean implements Serializable {
      */
     protected Integer phomeID;
     /**
+     * 生产基地负责人id
+     */
+    protected Integer userID;
+    /**
      * 生产基地name
      */
     protected String phomeName;
@@ -60,4 +64,8 @@ public class ProOrder extends PageBean implements Serializable {
      * 订单状态
      */
     protected Integer ordStatus;
+    /**
+     * 需要排除的订单id
+     */
+    protected Integer excludeId;
 }
