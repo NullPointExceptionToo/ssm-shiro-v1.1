@@ -57,4 +57,9 @@ public interface HomeService {
      * @return
      */
     Integer deleteHomeById(Home home);
+    /**
+     * 根据基地负责人和排除基地id查询基地
+     *
+     */
+    List<Home> selectHomeByUserIdAndExcludeId(Home home);
 }

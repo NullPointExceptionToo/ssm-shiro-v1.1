@@ -48,4 +48,8 @@ public class Home extends PageBean implements Serializable {
      * 基地状态描述
      */
     protected String statusDsc;
+    /**
+     * 排除指定的基地id
+     */
+    protected Integer excludeHomeId;
 }

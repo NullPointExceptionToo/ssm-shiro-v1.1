@@ -68,5 +68,9 @@ public class HomeServiceImpl implements HomeService {
 	public int updateStatusById(Home home) {
 		return homeDao.updateStatusById(home);
 	}
+	@Override
+	public List<Home> selectHomeByUserIdAndExcludeId(Home home) {
+		return homeDao.selectHomeByCondition(home);
+	}
 	
 }

@@ -40,6 +40,9 @@
         <if test="home.homeId != null and home.homeId != ''">
            and home.homeId = #{home.homeId}
         </if>
+        <if test="home.excludeHomeId != null and home.excludeHomeId != ''">
+           and home.homeId != #{home.excludeHomeId}
+        </if>
     </select>
     <insert id="insert">
         <!---->

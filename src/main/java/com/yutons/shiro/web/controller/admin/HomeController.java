@@ -79,11 +79,16 @@ public class HomeController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(Home home, Model model) {
-    	List<Home> proList = homeService.selectHomeByName(home.getHomeName());
-    	if (proList != null && proList.size() != 0) {
+    	if (!checkHomeName(home,"add")) {
+    		List<User> userArray = userService.findUserByRid(Constans.homeRole);
     		model.addAttribute("msg", "基地名已存在!");
     		model.addAttribute("home", home);
+        	model.addAttribute("homeRoles", userArray);
+            return "admin/home/add";
+    	}else if(!checkHomeUser(null, home.getHomeUserId())){
     		List<User> userArray = userService.findUserByRid(Constans.homeRole);
+    		model.addAttribute("msg", "该用户已绑定过基地!");
+    		model.addAttribute("home", home);
         	model.addAttribute("homeRoles", userArray);
             return "admin/home/add";
     	}else{
@@ -120,19 +125,26 @@ public class HomeController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(Home home,Model model) {
-    	if (!checkHomeName(home)) {
+    	if (!checkHomeName(home,"update")) {
             model.addAttribute("home", home);
             model.addAttribute("msg", "修改失败，基地名已被占用");
             List<User> userArray = userService.findUserByRid(Constans.homeRole);
         	model.addAttribute("homeRoles", userArray);
             return "admin/home/update";
+    	}else if(!checkHomeUser(home.getHomeId(), home.getHomeUserId())){
+    		model.addAttribute("home", home);
+            model.addAttribute("msg", "修改失败,该用户已绑定过基地");
+            List<User> userArray = userService.findUserByRid(Constans.homeRole);
+        	model.addAttribute("homeRoles", userArray);
+            return "admin/home/update";
+    	}else{
+    		User user = userService.selectUserById(home.getHomeUserId());
+    		home.setHomeUserName(user.getStaffname());
+        	home.setStatusDsc(StatusUtil.statusMap.get(home.getStatus()));
+        	homeService.updateHome(home);
+            model.addAttribute("msg", "基地修改成功!");
+            return "redirect:/admin/channel/home/index?msg=success";
     	}
-    	User user = userService.selectUserById(home.getHomeUserId());
-		home.setHomeUserName(user.getStaffname());
-    	home.setStatusDsc(StatusUtil.statusMap.get(home.getStatus()));
-    	homeService.updateHome(home);
-        model.addAttribute("msg", "基地修改成功!");
-        return "redirect:/admin/channel/home/index?msg=success";
     }
     
     /**
@@ -167,15 +179,37 @@ public class HomeController {
             return "error";
         }
     }
-    private Boolean checkHomeName(Home home){
+    /**
+     * 鉴定基地名唯一性
+     * @param home
+     * @return
+     */
+    private Boolean checkHomeName(Home home, String opera){
     	List<Home> proList = homeService.selectHomeByName(home.getHomeName());
         if (proList == null || proList.size() == 0) {
         	return true;
         }
-        List<Home> oldList = homeService.selectHomeById(home.getHomeId());
-        if (oldList.get(0).getHomeName().equals(proList.get(0).getHomeName())) {
-        	return true;
+        if ("update".equals(opera)) {
+        	List<Home> oldList = homeService.selectHomeById(home.getHomeId());
+            if (oldList.get(0).getHomeName().equals(proList.get(0).getHomeName())) {
+            	return true;
+            }
         }
         return false; 	
+    }
+    /**
+     * 鉴定基地负责人有效性（一个基地角色只能绑定一个基地）
+     * @param home
+     * @return
+     */
+    private Boolean checkHomeUser(Integer pid, Integer homeUserId){
+    	Home home = new Home();
+    	home.setHomeUserId(homeUserId);
+    	home.setExcludeHomeId(pid);
+    	List<Home> homeArray = homeService.selectHomeByUserIdAndExcludeId(home);
+    	if (homeArray != null && homeArray.size() > 0) {
+    		return false;
+    	}
+    	return true;
     }
 }
