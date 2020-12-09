@@ -26,31 +26,30 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> selectProductByTypeId(Integer productTypeID) {
 		Product product = new Product();
 		product.setProductTypeID(productTypeID);
-		return productDao.selectProductByCondition(product);
+		return productDao.selectProductByConditionNoPage(product);
 	}
 	@Override
 	public List<Product> selectProductById(Integer pid) {
 		Product product = new Product();
 		product.setPid(pid);
-		return productDao.selectProductByCondition(product);
+		return productDao.selectProductByConditionNoPage(product);
 	}
 	@Override
 	public List<Product> selectProductByName(String productName) {
 		Product product = new Product();
 		product.setProductName(productName);
-		return productDao.selectProductByCondition(product);
+		return productDao.selectProductByConditionNoPage(product);
 	}
 	@Override
 	public List<Product> selectProducts() {
-		return productDao.selectProductByCondition(new Product());
+		return productDao.selectProductByConditionNoPage(new Product());
 	}
 	@Override
-	public ModulePage<Product> selectProductsByPage() {
-		List<Product> data = productDao.selectProductByCondition(new Product());
+	public ModulePage<Product> selectProductsByPage(Product product) {
+		List<Product> data = productDao.selectProductByCondition(product);
+		int count = productDao.selectProductCountByCondition(product);
 		ModulePage<Product> productPage = new ModulePage<>();
-		if (data != null) {
-			productPage.setCount(data.size());
-		}
+		productPage.setCount(count);
 		productPage.setData(data);
         return productPage;
 	}

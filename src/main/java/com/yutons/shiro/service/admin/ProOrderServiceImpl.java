@@ -28,17 +28,15 @@ public class ProOrderServiceImpl implements ProOrderService {
     @Resource
     private HomeDao homeDao;
 	@Override
-	public ModulePage<ProOrder> selectProOrdersByPage() {
+	public ModulePage<ProOrder> selectProOrdersByPage(ProOrder proOrder) {
 		ModulePage<ProOrder> mode = new ModulePage<ProOrder>();
 		User user = TokenUtil.getUser();
-		ProOrder proOrder = new ProOrder();
 		if (user.getRoleId() == Constans.homeRole) {
 			proOrder.setUserID(user.getUserId());
 		}
 		List<ProOrder> list = proOrderDao.selectProOrdeByCondition(proOrder);
-		if (list != null &&list.size() != 0) {
-			mode.setCount(list.size());
-		}
+		int count = proOrderDao.selectProOrdeCountByCondition(proOrder);
+		mode.setCount(count);
 		mode.setData(list);
 		return mode;
 	}
@@ -50,18 +48,21 @@ public class ProOrderServiceImpl implements ProOrderService {
 			proOrder.setUserID(user.getUserId());
 		}
 		List<ProductCount> countArray = proOrderDao.selectGroupCount(proOrder);
-		if (countArray != null && countArray.size() != 0) {
-			count.setCount(countArray.size());
-		}
+		int pagecount = proOrderDao.selectGroupPageCount(proOrder);
+		count.setCount(pagecount);
 		count.setData(countArray);
 		return count;
+	}
+	@Override
+	public List<ProductCount> selectGroupCountNoPage(ProOrder proOrder) {
+		return proOrderDao.selectGroupCountNoPage(proOrder);
 	}
 	@Override
 	public Integer addProOrder(ProOrder proOrder) {
 		User user = TokenUtil.getUser();
 		Home home = new Home();
 		home.setHomeUserId(user.getUserId());
-		List<Home> homeArray = homeDao.selectHomeByCondition(home);
+		List<Home> homeArray = homeDao.selectHomeByConditionNoPage(home);
 		if (homeArray != null && homeArray.size() != 0) {
 			proOrder.setPhomeID(homeArray.get(0).getHomeId());
 		}else{
@@ -94,7 +95,6 @@ public class ProOrderServiceImpl implements ProOrderService {
 			if (restCount < proOrder.getSellNum()) {
 				return Constans.HOME_LESS; //标记2表示库存数量不足已将转移被删除订单的的已销售数量,暂时不允许删除
 			}
-			result = proOrderDao.deleteProOrderById(proOrder);
 			Integer need = proOrder.getSellNum();
 			List<ProOrder> array = proOrderDao.selectVailProOrdeByCondition(proOrder);
 			for (ProOrder p: array) {
@@ -109,6 +109,7 @@ public class ProOrderServiceImpl implements ProOrderService {
 					break;
 			}
 		}
+		result = proOrderDao.deleteProOrderById(proOrder);
 		return result;
 	}
     

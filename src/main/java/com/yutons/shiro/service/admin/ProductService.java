@@ -36,7 +36,7 @@ public interface ProductService {
      * 根据商品列表（分页）
      *
      */
-    ModulePage<Product> selectProductsByPage();
+    ModulePage<Product> selectProductsByPage(Product product);
     /**
      * 添加商品
      *

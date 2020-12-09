@@ -20,6 +20,16 @@ public interface StoreDao {
      */
     List<Store> selectStoreByCondition(@Param("store") Store store);
     /**
+     * 根据条件查询商店列表(不分页)
+     *
+     */
+    List<Store> selectStoreByConditionNoPage(@Param("store") Store store);
+    /**
+     * 根据条件查询商店count
+     *
+     */
+    int selectStoreCountByCondition(@Param("store") Store store);
+    /**
      * 添加商店
      *
      * @param Store

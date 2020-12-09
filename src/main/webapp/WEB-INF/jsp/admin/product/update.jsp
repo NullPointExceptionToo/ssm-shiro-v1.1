@@ -47,9 +47,6 @@
                     <div class="layui-input-block">
                         <select name="productTypeID" lay-verify="required" lay-search="">
                             <option value="">请选择商品种类</option>
-                            <option value="0">水果</option>
-                            <option value="1">蔬菜</option>
-                            <option value="2">五谷</option>
                             <c:if test="${product.productTypeID == 0}">
                                 <option value="0" selected>水果</option>
                                 <option value="1">蔬菜</option>

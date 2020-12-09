@@ -13,6 +13,27 @@
         product
         where pid = #{pid}
     </select>
+    <select id="selectProductByConditionNoPage" resultType="product">
+        <!---->
+        SELECT
+        pid,
+        productName,
+        productTypeID,
+        productTypeName,
+        productDes
+        FROM
+        product
+        where 1=1
+        <if test="product.productTypeID != null and product.productTypeID != ''">
+           and product.productTypeID = #{product.productTypeID}
+        </if>
+        <if test="product.productName != null and product.productName != ''">
+           and product.productName = #{product.productName,jdbcType=VARCHAR}
+        </if>
+        <if test="product.pid != null and product.pid != ''">
+           and product.pid = #{product.pid}
+        </if>
+    </select>
     <select id="selectProductByCondition" resultType="product">
         <!---->
         SELECT
@@ -21,6 +42,25 @@
         productTypeID,
         productTypeName,
         productDes
+        FROM
+        product
+        where 1=1
+        <if test="product.productTypeID != null and product.productTypeID != ''">
+           and product.productTypeID = #{product.productTypeID}
+        </if>
+        <if test="product.productName != null and product.productName != ''">
+           and product.productName = #{product.productName,jdbcType=VARCHAR}
+        </if>
+        <if test="product.pid != null and product.pid != ''">
+           and product.pid = #{product.pid}
+        </if>
+        LIMIT ${(product.page-1)*product.limit},
+        ${product.limit}
+    </select>
+    <select id="selectProductCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
         FROM
         product
         where 1=1

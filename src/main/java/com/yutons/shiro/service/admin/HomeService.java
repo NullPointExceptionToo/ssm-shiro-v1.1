@@ -27,7 +27,7 @@ public interface HomeService {
      * 根据基地列表（分页）
      *
      */
-    ModulePage<Home> selectHomesByPage();
+    ModulePage<Home> selectHomesByPage(Home home);
     /**
      * 添加基地
      *

@@ -45,7 +45,7 @@
                     <label class="layui-form-label">商品</label>
                     <div class="layui-input-block">
                         <select name="pid" lay-verify="required" lay-search="">
-                            <option value="">请选择商品</option>
+                            <option value="">请选择或搜索商品</option>
                             <c:forEach items="${products}" var="product">
                                 <c:if test="${product.pid==proOrder.pid}">
                                     <option value="${product.pid}" selected>${product.productName}</option>

@@ -40,6 +40,63 @@
         <if test="store.sid != null and store.sid != ''">
            and store.sid = #{store.sid}
         </if>
+        <if test="store.excludeStoreId != null and store.excludeStoreId != ''">
+           and store.sid != #{store.excludeStoreId}
+        </if>
+        LIMIT ${(store.page-1)*store.limit},
+        ${store.limit}
+    </select>
+    <select id="selectStoreByConditionNoPage" resultType="store">
+        <!---->
+        SELECT
+        sid,
+        storeName,
+        storeAdds,
+        storeUserId,
+        storeUserName,
+        status,
+        statusDsc
+        FROM
+        store
+        where 1=1
+        <if test="store.storeName != null and store.storeName!= ''">
+           and store.storeName = #{store.storeName,jdbcType=VARCHAR}
+        </if>
+        <if test="store.storeUserId != null and store.storeUserId != ''">
+           and store.storeUserId = #{store.storeUserId}
+        </if>
+        <if test="store.status != null and store.status != ''">
+           and store.status = #{store.status}
+        </if>
+        <if test="store.sid != null and store.sid != ''">
+           and store.sid = #{store.sid}
+        </if>
+        <if test="store.excludeStoreId != null and store.excludeStoreId != ''">
+           and store.sid != #{store.excludeStoreId}
+        </if>
+    </select>
+    <select id="selectStoreCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
+        FROM
+        store
+        where 1=1
+        <if test="store.storeName != null and store.storeName!= ''">
+           and store.storeName = #{store.storeName,jdbcType=VARCHAR}
+        </if>
+        <if test="store.storeUserId != null and store.storeUserId != ''">
+           and store.storeUserId = #{store.storeUserId}
+        </if>
+        <if test="store.status != null and store.status != ''">
+           and store.status = #{store.status}
+        </if>
+        <if test="store.sid != null and store.sid != ''">
+           and store.sid = #{store.sid}
+        </if>
+        <if test="store.excludeStoreId != null and store.excludeStoreId != ''">
+           and store.sid != #{store.excludeStoreId}
+        </if>
     </select>
     <insert id="insert">
         <!---->

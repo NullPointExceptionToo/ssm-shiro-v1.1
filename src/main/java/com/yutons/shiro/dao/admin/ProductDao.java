@@ -20,6 +20,16 @@ public interface ProductDao {
      */
     List<Product> selectProductByCondition(@Param("product") Product product);
     /**
+     * 根据条件查询商品列表(不分页)
+     *
+     */
+    List<Product> selectProductByConditionNoPage(@Param("product") Product product);
+    /**
+     * 根据条件查询商品count
+     *
+     */
+    int selectProductCountByCondition(@Param("product") Product product);
+    /**
      * 添加商品
      *
      * @param product

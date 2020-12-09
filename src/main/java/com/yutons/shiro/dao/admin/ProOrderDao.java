@@ -15,6 +15,11 @@ public interface ProOrderDao {
      */
     List<ProOrder> selectProOrdeByCondition(@Param("proOrder") ProOrder proOrder);
     /**
+     * 根据条件查询订单count
+     *
+     */
+    int selectProOrdeCountByCondition(@Param("proOrder") ProOrder proOrder);
+    /**
      * 根据订单id查询订单
      *
      */
@@ -31,6 +36,17 @@ public interface ProOrderDao {
      *
      */
     List<ProductCount> selectGroupCount(@Param("proOrder") ProOrder proOrder);
+    /**
+     * 分组数量--用于分页
+     *
+     */
+     int selectGroupPageCount(@Param("proOrder") ProOrder proOrder);
+    
+    /**
+     * 分组统计商品库存(不分页)
+     *
+     */
+    List<ProductCount> selectGroupCountNoPage(@Param("proOrder") ProOrder proOrder);
     
     /**
      * 根据商品id统计某种商品的库存

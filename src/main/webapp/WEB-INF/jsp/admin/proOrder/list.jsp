@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -24,9 +25,10 @@
                     <i class="layui-icon" style="line-height:25px">&#x1002</i></a>
             </div>
         </div>
-	    <a id="addButn" class="layui-btn layui-btn-normal" role="button"
-	           style="margin-right: 10px;float: right" href="${pageContext.request.contextPath}/admin/order/proOrder/add">添加订单</a>
-        <input type="text" id="checkRole" value="${checkRole}" hidden>
+        <c:if test="${checkRole == 5}">
+		    <a id="addButn" class="layui-btn layui-btn-normal" role="button"
+		           style="margin-right: 10px;float: right" href="${pageContext.request.contextPath}/admin/order/proOrder/add">添加订单</a>
+        </c:if>
         <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
             <table class="layui-table"
                    lay-data="{height: 'full-110',even: true,url:'${pageContext.request.contextPath}/admin/order/proOrder/list',limits:[10,30,50,100], limit: 10,page:true,id:'oid'}"
@@ -68,11 +70,6 @@
         var table = layui.table,
             element = layui.element,
             $ = layui.jquery;
-        if ($("#checkRole").val() != 5) {
-        	$("#addButn").hide();
-        }else{
-        	$("#addButn").show();
-        }
         //监听导航点击
         element.on('nav(demo)', function (elem) {
             //console.log(elem)
@@ -93,11 +90,11 @@
                     $.post("${pageContext.request.contextPath}/admin/order/proOrder/deleteProOrderById", {oid: oid}, function (data) {
                         if ("success"==data) {
                             //如果修改成功,则刷新页面
-                            window.location.reload(); //刷新当前页面
                             layer.msg('删除成功!', {icon: 1});
+                            window.location.reload(); //刷新当前页面
                         }
                         if ("mark"==data) {
-                            layer.msg('失败，产品库存剩余数量不足以抵消该订单已售数量', {icon: 5});
+                            layer.msg('删除失败,订单产品已售,产品库存剩余量不足以支持该订单已售数量转移', {icon: 5});
                         }
                     }).error(function () {
                         layer.msg('删除失败!', {icon:5});

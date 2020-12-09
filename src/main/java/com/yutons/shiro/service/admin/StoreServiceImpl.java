@@ -28,29 +28,34 @@ public class StoreServiceImpl implements StoreService {
 	public List<Store> selectStoreById(Integer sid) {
 		Store store = new Store();
 		store.setSid(sid);
-		return storeDao.selectStoreByCondition(store);
+		return storeDao.selectStoreByConditionNoPage(store);
 	}
 	@Override
 	public List<Store> selectStoreByName(String storeName) {
 		Store store = new Store();
 		store.setStoreName(storeName);
-		return storeDao.selectStoreByCondition(store);
+		return storeDao.selectStoreByConditionNoPage(store);
 	}
 	@Override
-	public ModulePage<Store> selectStoresByPage() {
+	public ModulePage<Store> selectStoresByPage(Store store) {
 		User user = TokenUtil.getUser();
-		Store store = new Store();
 		if (user.getRoleId() == 6) {
 			store.setStoreUserId(user.getUserId());
 		}
 		List<Store> data = storeDao.selectStoreByCondition(store);
+		int count = storeDao.selectStoreCountByCondition(store);
 		ModulePage<Store> storePage = new ModulePage<>();
-		if (data != null) {
-			storePage.setCount(data.size());
-		}
+		storePage.setCount(count);
 		storePage.setData(data);
         return storePage;
 	}
+	
+	
+	@Override
+	public List<Store> selectStoreByUserIdAndExcludeId(Store store) {
+		return storeDao.selectStoreByConditionNoPage(store);
+	}
+	
 	@Override
 	public Integer addStore(Store store) {
 		return storeDao.insert(store);

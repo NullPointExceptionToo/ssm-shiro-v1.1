@@ -2,6 +2,7 @@ package com.yutons.shiro.bean.admin;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.yutons.shiro.bean.PageBean;
 
@@ -41,7 +42,23 @@ public class CosOrder extends PageBean implements Serializable {
      */
     protected String cosDetail;
     /**
+     * 订单关联信息
+     */
+    protected String relOid;
+    /**
      * 订单状态
      */
     protected Integer ordStatus;
+    /**
+     * 订单状态Dsc
+     */
+    protected String ordStatusDsc;
+    /**
+     * 商店负责人ID
+     */
+    protected Integer userID;
+    /**
+     * 订单货物列表
+     */
+    protected List<OrdItem> ordArray;
 }

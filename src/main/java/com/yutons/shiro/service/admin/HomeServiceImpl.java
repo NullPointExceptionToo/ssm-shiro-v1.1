@@ -29,26 +29,24 @@ public class HomeServiceImpl implements HomeService {
 	public List<Home> selectHomeById(Integer homeId) {
 		Home home = new Home();
 		home.setHomeId(homeId);
-		return homeDao.selectHomeByCondition(home);
+		return homeDao.selectHomeByConditionNoPage(home);
 	}
 	@Override
 	public List<Home> selectHomeByName(String homeName) {
 		Home home = new Home();
 		home.setHomeName(homeName);
-		return homeDao.selectHomeByCondition(home);
+		return homeDao.selectHomeByConditionNoPage(home);
 	}
 	@Override
-	public ModulePage<Home> selectHomesByPage() {
+	public ModulePage<Home> selectHomesByPage(Home home) {
 		User user = TokenUtil.getUser();
-		Home home = new Home();
 		if (user.getRoleId() == Constans.homeRole) {
 			home.setHomeUserId(user.getUserId());
 		}
 		List<Home> data = homeDao.selectHomeByCondition(home);
+		int count = homeDao.selectHomeCountByCondition(home);
 		ModulePage<Home> homePage = new ModulePage<>();
-		if (data != null) {
-			homePage.setCount(data.size());
-		}
+		homePage.setCount(count);
 		homePage.setData(data);
         return homePage;
 	}
@@ -70,7 +68,7 @@ public class HomeServiceImpl implements HomeService {
 	}
 	@Override
 	public List<Home> selectHomeByUserIdAndExcludeId(Home home) {
-		return homeDao.selectHomeByCondition(home);
+		return homeDao.selectHomeByConditionNoPage(home);
 	}
 	
 }

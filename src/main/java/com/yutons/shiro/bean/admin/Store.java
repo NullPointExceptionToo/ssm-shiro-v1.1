@@ -48,4 +48,8 @@ public class Store extends PageBean implements Serializable {
      * 商店状态描述
      */
     protected String statusDsc;
+    /**
+     * 排除商店ID（用于商店修改时验证商店和角色的一对一关系）
+     */
+    protected Integer excludeStoreId;
 }

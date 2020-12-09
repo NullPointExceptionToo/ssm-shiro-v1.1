@@ -49,7 +49,7 @@ public class ProOrderController {
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModulePage<ProOrder> list(ProOrder proOrder) {
-    	return proOrderService.selectProOrdersByPage();
+    	return proOrderService.selectProOrdersByPage(proOrder);
     }
     
     /**

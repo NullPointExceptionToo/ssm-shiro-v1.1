@@ -115,17 +115,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserPage selectUserPage(User user) {
         List<User> data = userDao.selectUserByCondition(user);
+        Integer count = userDao.selectUserCountByCondition();
         User token = TokenUtil.getUser();
         Role role = roleDao.selectRoleByUserId(token.getUserId());
         if (role.getId() >= 2) {
             for (int i = 0; i < data.size(); i++) {
                 if (data.get(i).getRoleId() == 1 || data.get(i).getRoleId() == 2) {
                     data.remove(i);
-                    i--;
+                    count--;
                 }
             }
         }
-        Integer count = userDao.selectUserCountByCondition();
         UserPage userPage = new UserPage();
         userPage.setCount(count);
         userPage.setData(data);

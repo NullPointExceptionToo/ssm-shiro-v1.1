@@ -11,11 +11,6 @@
 
 <body>
 <div class="layui-container">
-    <!--
-        作者：yuton.yao@qq.com
-        时间：2017-09-01
-        描述：引入公共html
-    -->
     <jsp:include page="inc.jsp"></jsp:include>
     <div class="layui-row">
         <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
@@ -83,8 +78,8 @@
                     $.post("${pageContext.request.contextPath}/admin/channel/product/deleteProductById", {pid: pid}, function (data) {
                         if ("success"==data) {
                             //如果修改成功,则刷新页面
-                            window.location.reload(); //刷新当前页面
                             layer.msg('删除成功!', {icon: 1});
+                            window.location.reload(); //刷新当前页面
                         }
                     }).error(function () {
                         layer.msg('删除失败!', {icon:5});

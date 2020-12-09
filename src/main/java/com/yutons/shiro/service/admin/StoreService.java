@@ -21,11 +21,17 @@ public interface StoreService {
      *
      */
     List<Store> selectStoreByName(String storeName);
+    
+    /**
+     * 根据商店角色id和过滤商店ID查询商店
+     *
+     */
+    List<Store> selectStoreByUserIdAndExcludeId(Store store);
     /**
      * 根据商店列表（分页）
      *
      */
-    ModulePage<Store> selectStoresByPage();
+    ModulePage<Store> selectStoresByPage(Store store);
     /**
      * 添加商店
      *

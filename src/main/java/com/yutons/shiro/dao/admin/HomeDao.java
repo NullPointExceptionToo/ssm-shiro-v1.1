@@ -20,6 +20,16 @@ public interface HomeDao {
      */
     List<Home> selectHomeByCondition(@Param("home") Home home);
     /**
+     * 根据条件查询基地列表(不分页)
+     *
+     */
+    List<Home> selectHomeByConditionNoPage(@Param("home") Home home);
+    /**
+     * 根据条件查询基地count
+     *
+     */
+    int selectHomeCountByCondition(@Param("home") Home home);
+    /**
      * 添加基地
      *
      * @param Home

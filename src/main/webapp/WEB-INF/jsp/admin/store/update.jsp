@@ -54,7 +54,7 @@
                     <label class="layui-form-label">商店负责人</label>
                     <div class="layui-input-block">
                         <select name="storeUserId" lay-verify="required" lay-search="">
-                            <option value="">请选择商店负责人</option>
+                            <option value="">请选择或搜索商店负责人</option>
                             <c:forEach items="${storeRoles}" var="storeRole">
                                 <c:if test="${store.storeUserId==storeRole.id}">
                                     <option value="${storeRole.userId}" selected>${storeRole.staffname}</option>

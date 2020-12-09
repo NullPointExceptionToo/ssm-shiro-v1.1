@@ -40,7 +40,7 @@ public class ProductController {
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModulePage<Product> list(Product product) {
-        return productService.selectProductsByPage();
+        return productService.selectProductsByPage(product);
     }
     /**
      * 获取商品不分页列表

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yutons.shiro.bean.admin.Home;
 import com.yutons.shiro.bean.admin.ModulePage;
 import com.yutons.shiro.bean.admin.Store;
 import com.yutons.shiro.bean.admin.User;
@@ -48,7 +49,7 @@ public class StoreController {
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModulePage<Store> list(Store store) {
-    	ModulePage<Store> storeArray = storeService.selectStoresByPage();
+    	ModulePage<Store> storeArray = storeService.selectStoresByPage(store);
     	for (Store ho:storeArray.getData()) {
     		User user = userService.selectUserById(ho.getStoreUserId());
     		ho.setStoreUserName(user.getStaffname());
@@ -79,13 +80,18 @@ public class StoreController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(Store store, Model model) {
-    	List<Store> proList = storeService.selectStoreByName(store.getStoreName());
-    	if (proList != null && proList.size() != 0) {
+    	if (!checkStoreName(store,"add")) {
     		model.addAttribute("msg", "商店名已存在!");
     		model.addAttribute("store", store);
     		List<User> userArray = userService.findUserByRid(Constans.storeRole);
         	model.addAttribute("storeRoles", userArray);
             return "admin/store/add";
+    	}else if (!checkStoreUser(null, store.getStoreUserId())) {
+    		model.addAttribute("store", store);
+            model.addAttribute("msg", "新增失败,该用户已绑定过商店");
+            List<User> userArray = userService.findUserByRid(Constans.storeRole);
+        	model.addAttribute("storeRoles", userArray);
+        	return "admin/store/add";
     	}else{
     		store.setStatusDsc(StatusUtil.statusMap.get(store.getStatus()));
     		storeService.addStore(store);
@@ -120,12 +126,18 @@ public class StoreController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(Store store,Model model) {
-    	if (!checkStoreName(store)) {
+    	if (!checkStoreName(store,"update")) {
             model.addAttribute("store", store);
             model.addAttribute("msg", "修改失败，商店名已被占用");
             List<User> userArray = userService.findUserByRid(Constans.storeRole);
         	model.addAttribute("storeRoles", userArray);
             return "admin/store/update";
+    	}else if (!checkStoreUser(store.getSid(), store.getStoreUserId())) {
+    		model.addAttribute("store", store);
+            model.addAttribute("msg", "修改失败,该用户已绑定过商店");
+            List<User> userArray = userService.findUserByRid(Constans.storeRole);
+        	model.addAttribute("storeRoles", userArray);
+        	return "admin/store/update";
     	}
     	User user = userService.selectUserById(store.getStoreUserId());
 		store.setStoreUserName(user.getStaffname());
@@ -167,15 +179,33 @@ public class StoreController {
             return "error";
         }
     }
-    private Boolean checkStoreName(Store store){
+    private Boolean checkStoreName(Store store, String opera){
     	List<Store> proList = storeService.selectStoreByName(store.getStoreName());
         if (proList == null || proList.size() == 0) {
         	return true;
         }
-        List<Store> oldList = storeService.selectStoreById(store.getSid());
-        if (oldList.get(0).getStoreName().equals(proList.get(0).getStoreName())) {
-        	return true;
+        if ("update".equals(opera)) {
+	        List<Store> oldList = storeService.selectStoreById(store.getSid());
+	        if (oldList.get(0).getStoreName().equals(proList.get(0).getStoreName())) {
+	        	return true;
+	        }
         }
         return false; 	
+    }
+    
+    /**
+     * 鉴定商店角色有效性（一个商店角色只能绑定一个商店）
+     * @param store
+     * @return
+     */
+    private Boolean checkStoreUser(Integer sid, Integer storeUserId){
+    	Store store = new Store();
+    	store.setStoreUserId(storeUserId);
+    	store.setExcludeStoreId(sid);
+    	List<Store> storeArray = storeService.selectStoreByUserIdAndExcludeId(store);
+    	if (storeArray != null && storeArray.size() > 0) {
+    		return false;
+    	}
+    	return true;
     }
 }

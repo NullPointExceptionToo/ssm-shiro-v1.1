@@ -7,11 +7,6 @@ import lombok.extern.log4j.Log4j;
 
 import java.util.List;
 
-/**
- * @author yutons
- * @desc shiro权限控制之用户实体类(分页)
- * @date 2017/10/25 16:35
- */
 @Data
 @Log4j
 @NoArgsConstructor

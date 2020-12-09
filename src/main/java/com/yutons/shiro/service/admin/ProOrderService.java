@@ -11,13 +11,18 @@ public interface ProOrderService {
      * 订单列表（分页）
      *
      */
-    ModulePage<ProOrder> selectProOrdersByPage();
+    ModulePage<ProOrder> selectProOrdersByPage(ProOrder proOrder);
 
     /**
      * 分组统计商品库存
      *
      */
     ModulePage<ProductCount> selectGroupCount(ProOrder proOrder);
+    /**
+     * 分组统计商品库存(不分页)
+     *
+     */
+    List<ProductCount> selectGroupCountNoPage(ProOrder proOrder);
     
     /**
      * 添加订单

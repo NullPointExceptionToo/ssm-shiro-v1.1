@@ -48,7 +48,7 @@ public class HomeController {
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModulePage<Home> list(Home home) {
-    	ModulePage<Home> homeArray = homeService.selectHomesByPage();
+    	ModulePage<Home> homeArray = homeService.selectHomesByPage(home);
     	for (Home ho:homeArray.getData()) {
     		User user = userService.selectUserById(ho.getHomeUserId());
     		ho.setHomeUserName(user.getStaffname());

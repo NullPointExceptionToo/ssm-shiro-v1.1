@@ -15,6 +15,35 @@
         home
         where homeId = #{homeId}
     </select>
+    <select id="selectHomeByConditionNoPage" resultType="home">
+        <!---->
+        SELECT
+        homeId,
+        homeName,
+        homeAdds,
+        homeUserId,
+        homeUserName,
+        status,
+        statusDsc
+        FROM
+        home
+        where 1=1
+        <if test="home.homeName != null and home.homeName!= ''">
+           and home.homeName = #{home.homeName,jdbcType=VARCHAR}
+        </if>
+        <if test="home.homeUserId != null and home.homeUserId != ''">
+           and home.homeUserId = #{home.homeUserId}
+        </if>
+        <if test="home.status != null and home.status != ''">
+           and home.status = #{home.status}
+        </if>
+        <if test="home.homeId != null and home.homeId != ''">
+           and home.homeId = #{home.homeId}
+        </if>
+        <if test="home.excludeHomeId != null and home.excludeHomeId != ''">
+           and home.homeId != #{home.excludeHomeId}
+        </if>
+    </select>
     <select id="selectHomeByCondition" resultType="home">
         <!---->
         SELECT
@@ -25,6 +54,31 @@
         homeUserName,
         status,
         statusDsc
+        FROM
+        home
+        where 1=1
+        <if test="home.homeName != null and home.homeName!= ''">
+           and home.homeName = #{home.homeName,jdbcType=VARCHAR}
+        </if>
+        <if test="home.homeUserId != null and home.homeUserId != ''">
+           and home.homeUserId = #{home.homeUserId}
+        </if>
+        <if test="home.status != null and home.status != ''">
+           and home.status = #{home.status}
+        </if>
+        <if test="home.homeId != null and home.homeId != ''">
+           and home.homeId = #{home.homeId}
+        </if>
+        <if test="home.excludeHomeId != null and home.excludeHomeId != ''">
+           and home.homeId != #{home.excludeHomeId}
+        </if>
+        LIMIT ${(home.page-1)*home.limit},
+        ${home.limit}
+    </select>
+    <select id="selectHomeCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
         FROM
         home
         where 1=1

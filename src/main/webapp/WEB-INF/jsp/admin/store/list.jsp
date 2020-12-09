@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -11,11 +13,6 @@
 
 <body>
 <div class="layui-container">
-    <!--
-        作者：yuton.yao@qq.com
-        时间：2017-09-01
-        描述：引入公共html
-    -->
     <jsp:include page="inc.jsp"></jsp:include>
     <div class="layui-row">
         <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
@@ -29,9 +26,10 @@
                     <i class="layui-icon" style="line-height:25px">&#x1002</i></a>
             </div>
         </div>
-	    <a id="addButn" class="layui-btn layui-btn-normal" role="button"
-	           style="margin-right: 10px;float: right" href="${pageContext.request.contextPath}/admin/channel/store/add">添加商店</a>
-        <input type="text" id="checkRole" value="${checkRole}" hidden>
+        <c:if test="${checkRole == 4}">
+		    <a id="addButn" class="layui-btn layui-btn-normal" role="button"
+		           style="margin-right: 10px;float: right" href="${pageContext.request.contextPath}/admin/channel/store/add">添加商店</a>
+        </c:if>
         <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
             <table class="layui-table"
                    lay-data="{height: 'full-110',even: true,url:'${pageContext.request.contextPath}/admin/channel/store/list',limits:[10,30,50,100], limit: 10,page:true,id:'sid'}"
@@ -40,8 +38,8 @@
                 <tr>
                     <th lay-data="{field:'sid',align:'center', width:100, sort: true}">ID</th>
                     <th lay-data="{field:'storeName',align:'center', width:200, sort: true}">商店名称</th>
-                    <th lay-data="{field:'storeUserName', align:'center',width:100, sort: true}">商店负责人</th>
-                    <th lay-data="{field:'storeAdds', align:'center',width:300, sort: true}">商店地址</th>
+                    <th lay-data="{field:'storeUserName', align:'center',width:150, sort: true}">商店负责人</th>
+                    <th lay-data="{field:'storeAdds', align:'center',width:400, sort: true}">商店地址</th>
                     <th lay-data="{field:'status',align:'center', width:100, sort: true,templet: '#storeStateTpl'}">
                         商店状态
                     </th>
@@ -71,11 +69,6 @@
         var table = layui.table,
             element = layui.element,
             $ = layui.jquery;
-        if ($("#checkRole").val() != 4) {
-        	$("#addButn").hide();
-        }else{
-        	$("#addButn").show();
-        }
         //监听导航点击
         element.on('nav(demo)', function (elem) {
             //console.log(elem)
@@ -99,8 +92,8 @@
                     $.post("${pageContext.request.contextPath}/admin/channel/store/deleteStoreById", {sid: sid}, function (data) {
                         if ("success"==data) {
                             //如果修改成功,则刷新页面
-                            window.location.reload(); //刷新当前页面
                             layer.msg('删除成功!', {icon: 1});
+                            window.location.reload(); //刷新当前页面
                         }
                     }).error(function () {
                         layer.msg('删除失败!', {icon:5});

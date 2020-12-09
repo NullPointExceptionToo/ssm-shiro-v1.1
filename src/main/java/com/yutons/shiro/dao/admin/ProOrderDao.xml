@@ -50,9 +50,71 @@
         <if test="proOrder.ordStatus != null and proOrder.ordStatus != ''">
            and po.ordStatus = #{proOrder.ordStatus}
         </if>
+        LIMIT ${(proOrder.page-1)*proOrder.limit},
+        ${proOrder.limit}
+    </select>
+    <select id="selectProOrdeCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
+        FROM
+        proOrder po left join product p on po.pid = p.pid left join home h on po.phomeID = h.homeId
+        where 1=1
+        <if test="proOrder.oid != null and proOrder.oid != ''">
+           and po.oid = #{proOrder.oid}
+        </if>
+        <if test="proOrder.phomeID != null and proOrder.phomeID != ''">
+           and po.phomeID = #{proOrder.phomeID}
+        </if>
+        <if test="proOrder.userID != null and proOrder.userID != ''">
+           and h.homeUserId = #{proOrder.userID}
+        </if>
+        <if test="proOrder.pid != null and proOrder.pid != ''">
+           and po.pid = #{proOrder.pid}
+        </if>
+        <if test="proOrder.ordStatus != null and proOrder.ordStatus != ''">
+           and po.ordStatus = #{proOrder.ordStatus}
+        </if>
     </select>
     <!-- 分组统计商品库存 -->
     <select id="selectGroupCount" resultType="com.yutons.shiro.bean.admin.ProductCount">
+        <!---->
+        SELECT
+        po.pid,
+        p.productName as proName,
+        sum(po.proNum) as proCount,
+        sum(po.sellNum)as sellCount,
+        (sum(po.proNum) - sum(po.sellNum)) as restCount
+        FROM
+        proOrder po left join product p on po.pid = p.pid left join home h on po.phomeID = h.homeId 
+        where 1=1
+        <if test="proOrder.phomeID != null and proOrder.phomeID != ''">
+           and po.phomeID = #{proOrder.phomeID}
+        </if>
+        <if test="proOrder.userID != null and proOrder.userID != ''">
+           and h.homeUserId = #{proOrder.userID}
+        </if>
+        group by po.pid,p.productName
+        LIMIT ${(proOrder.page-1)*proOrder.limit},
+        ${proOrder.limit}
+    </select>
+    <!-- 分组数量用于分页-->
+    <select id="selectGroupPageCount" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(distinct po.pid)
+        FROM
+        proOrder po left join product p on po.pid = p.pid left join home h on po.phomeID = h.homeId 
+        where 1=1
+        <if test="proOrder.phomeID != null and proOrder.phomeID != ''">
+           and po.phomeID = #{proOrder.phomeID}
+        </if>
+        <if test="proOrder.userID != null and proOrder.userID != ''">
+           and h.homeUserId = #{proOrder.userID}
+        </if>
+    </select>
+    <!-- 分组统计商品库存 -->
+    <select id="selectGroupCountNoPage" resultType="com.yutons.shiro.bean.admin.ProductCount">
         <!---->
         SELECT
         po.pid,

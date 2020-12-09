@@ -59,7 +59,7 @@
                     <label class="layui-form-label">基地负责人</label>
                     <div class="layui-input-block">
                         <select name="homeUserId" lay-verify="required" lay-search="">
-                            <option value="">请选择基地负责人</option>
+                            <option value="">请选择或搜索基地负责人</option>
                             <c:forEach items="${homeRoles}" var="homeRole">
                                 <c:if test="${home.homeUserId==homeRole.id}">
                                     <option value="${homeRole.userId}" selected>${homeRole.staffname}</option>
