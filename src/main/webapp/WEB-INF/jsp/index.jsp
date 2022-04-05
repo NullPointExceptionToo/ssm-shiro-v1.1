@@ -18,31 +18,33 @@
           href="${pageContext.request.contextPath}/resources/h-ui/lib/Hui-iconfont/1.0.8/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/h-ui/skin/green/skin.css"
           id="skin"/>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/assets/waifu.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/h-ui/css/style.css"/>
-    <title>农贸系统</title>
+    <title>阿宝健康监测系统</title>
 </head>
 
 <body>
 <header class="navbar-wrapper">
     <div class="navbar navbar-fixed-top">
         <div class="container-fluid cl">
-            <a class="logo navbar-logo f-l mr-10 hidden-xs" href="javascript:;">农贸系统</a>
-            <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="javascript:;">农贸系统</a>
+            <a class="logo navbar-logo f-l mr-10 hidden-xs" href="javascript:;">阿宝健康监测系统</a>
+            <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="javascript:;">阿宝健康监测系统</a>
             <span class="logo navbar-slogan f-l mr-10 hidden-xs"></span>
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;"
                onclick="showAllBtn()">&#xe667;</a>
             <nav class="nav navbar-nav">
                 <ul class="cl">
-                    <li class="dropDown dropDown_hover">
-                        <%--遍历获取头部功能分类--%>
-                        <c:forEach items="${list}" var="menus">
-                    <li class="navbar-levelone current">
-                        <c:if test="${menus.size()>0}">
-                            <a href="javascript:;">${menus.get(0).menuname}</a>
-                        </c:if>
-                    </li>
-                    </c:forEach>
-                    </li>
+                    <%--<li class="dropDown dropDown_hover">--%>
+                        <%--&lt;%&ndash;遍历获取头部功能分类&ndash;%&gt;--%>
+                        <%--<c:forEach items="${list}" var="menus">--%>
+                    <%--<li class="navbar-levelone current">--%>
+                        <%--<c:if test="${menus.size()>0}">--%>
+                            <%--<a href="javascript:;">${menus.get(0).menuname}</a>--%>
+                        <%--</c:if>--%>
+                    <%--</li>--%>
+                    <%--</c:forEach>--%>
+                    <%--</li>--%>
                 </ul>
             </nav>
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
@@ -50,7 +52,7 @@
                     <li id="getTimeNow"></li>
                     <li></li>
                     <li></li>
-                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;员工工号:&nbsp;&nbsp;&nbsp;&nbsp;<shiro:principal
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登录名:&nbsp;&nbsp;&nbsp;&nbsp;<shiro:principal
                             property="username"/>
                         &nbsp;&nbsp;姓名:
                     </li>
@@ -68,19 +70,22 @@
                             </li>
                         </ul>
                     </li>
-                    <%--<li id="Hui-msg">
-                        <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont"
-                                                                                           style="font-size:18px">&#xe68a;</i></a>
-                    </li>
+                    <%--<li id="Hui-msg">--%>
+                        <%--<a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont"--%>
+                                                                                           <%--style="font-size:18px">&#xe68a;</i></a>--%>
+                    <%--</li>--%>
                     <li id="Hui-skin" class="dropDown right dropDown_hover">
                         <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont"
                                                                                 style="font-size:18px">&#xe62a;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
                             <li>
                                 <a href="javascript:;" data-val="default" title="默认（蓝色）">默认（蓝色）</a>
+                                <a href="javascript:;" data-val="red" title="紅色">紅色</a>
+                                <a href="javascript:;" data-val="yellow" title="黃色">黃色</a>
+                                <a href="javascript:;" data-val="orange" title="橙色">橙色</a>
                             </li>
                         </ul>
-                    </li>--%>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -114,7 +119,7 @@
         </div>
     </c:forEach>
     <div class="menu_dropdown bk_2">
-        <dl id="menu-member">
+        <dl id="menu-member1">
             <dt><%--<i class="Hui-iconfont"></i>--%><a data-href="${pageContext.request.contextPath}/logout"
                                                data-title="退出登录" href="javascript:;">退出登录</a>
             </dt>
@@ -149,6 +154,24 @@
         </div>
     </div>
 </section>
+<canvas width="1366" height="550" style="position: fixed; top: 0px; left: 0px; pointer-events: none; z-index: 999999;"></canvas>
+<div class="waifu" style="z-index:999">
+    <div class="waifu-tips"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="waifu-tool">
+        <span class="fui-home"></span>
+        <span class="fui-chat"></span>
+        <span class="fui-eye"></span>
+        <span class="fui-user"></span>
+        <span class="fui-photo"></span>
+        <span class="fui-info-circle"></span>
+        <span class="fui-cross"></span>
+    </div>
+</div>
+
+<script src="${pageContext.request.contextPath}/resources/assets/waifu-tips.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/live2d.js"></script>
+<script type="text/javascript">initModel("${pageContext.request.contextPath}/resources/assets/")</script>
 
 <div class="contextMenu" id="Huiadminmenu">
     <ul>

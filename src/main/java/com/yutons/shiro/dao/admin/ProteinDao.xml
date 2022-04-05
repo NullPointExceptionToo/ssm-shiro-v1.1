@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.ProteinDao">
+    <select id="selectProteinById" resultType="com.yutons.shiro.bean.admin.quota.Protein">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.urine,
+        co.urine_protein,
+        co.urine_protein24
+        FROM
+        t_protein co
+        where 1=1
+        <if test="protein.id != null">
+           and co.id = #{protein.id}
+        </if>
+    </select>
+    <select id="selectProteinByCondition" resultType="com.yutons.shiro.bean.admin.quota.Protein">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.urine,
+        co.urine_protein,
+        co.urine_protein24
+        FROM
+        t_protein co
+        where 1=1
+        <if test="protein.check_id != null">
+           and co.check_id = #{protein.check_id}
+        </if>
+        LIMIT ${(protein.page-1)*protein.limit},
+        ${protein.limit}
+    </select>
+    <select id="selectProteinCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
+        FROM
+        t_protein co
+        where 1=1
+        <if test="protein.check_id != null">
+            and co.check_id = #{protein.check_id}
+        </if>
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="protein.id">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `t_protein` (
+        check_id,
+        urine,
+        urine_protein,
+        urine_protein24
+        )
+        VALUES
+        (
+        #{protein.check_id},
+        #{protein.urine},
+        #{protein.urine_protein},
+        #{protein.urine_protein24}
+        )
+    </insert>
+    <update id="update">
+        UPDATE `t_protein`
+        SET
+            `urine` = #{protein.urine}
+
+            ,`urine_protein` = #{protein.urine_protein}
+
+            ,`urine_protein24` = #{protein.urine_protein24}
+        WHERE
+        (`id` =${protein.id});
+    </update>
+    <delete id="deleteProteinById">
+        <!---->
+        DELETE
+        FROM
+        t_protein
+        WHERE
+        id = #{protein.id}
+    </delete>
+    <delete id="deleteProteinByCheckId">
+        <!---->
+        DELETE
+        FROM
+        t_protein
+        WHERE
+        check_id = #{checkId}
+    </delete>
+</mapper>
+

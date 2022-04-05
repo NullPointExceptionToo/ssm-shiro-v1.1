@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.ScreeningDao">
+    <select id="selectScreeningById" resultType="com.yutons.shiro.bean.admin.quota.Screening">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.total_protein,
+        co.white_protein,
+        co.circle_protein,
+        co.whilte_circle_per,
+        co.aminotransferase,
+        co.all_bilirubin,
+        co.dir_bilirubin,
+        co.no_bilirubin,
+        co.glomerulus_per,
+        co.jigan,
+        co.niaosu,
+        co.niaoshuan,
+        co.glycerol,
+        co.all_cholesterol,
+        co.high_protein,
+        co.no_glucose,
+        co.jia,
+        co.na,
+        co.lv
+        FROM
+        t_screening co
+        where 1=1
+        <if test="screening.id != null">
+           and co.id = #{screening.id}
+        </if>
+    </select>
+    <select id="selectScreeningByCondition" resultType="com.yutons.shiro.bean.admin.quota.Screening">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.total_protein,
+        co.white_protein,
+        co.circle_protein,
+        co.whilte_circle_per,
+        co.aminotransferase,
+        co.all_bilirubin,
+        co.dir_bilirubin,
+        co.no_bilirubin,
+        co.glomerulus_per,
+        co.jigan,
+        co.niaosu,
+        co.niaoshuan,
+        co.glycerol,
+        co.all_cholesterol,
+        co.high_protein,
+        co.no_glucose,
+        co.jia,
+        co.na,
+        co.lv
+        FROM
+        t_screening co
+        where 1=1
+        <if test="screening.check_id != null">
+           and co.check_id = #{screening.check_id}
+        </if>
+        LIMIT ${(screening.page-1)*screening.limit},
+        ${screening.limit}
+    </select>
+    <select id="selectScreeningCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
+        FROM
+        t_screening co
+        where 1=1
+        <if test="screening.check_id != null">
+            and co.check_id = #{screening.check_id}
+        </if>
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="screening.id">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `t_screening` (
+        check_id,
+        total_protein,
+        white_protein,
+        circle_protein,
+        whilte_circle_per,
+        aminotransferase,
+        all_bilirubin,
+        dir_bilirubin,
+        no_bilirubin,
+        glomerulus_per,
+        jigan,
+        niaosu,
+        niaoshuan,
+        glycerol,
+        all_cholesterol,
+        high_protein,
+        no_glucose,
+        jia,
+        na,
+        lv
+        )
+        VALUES
+        (
+        #{screening.check_id},
+        #{screening.total_protein},
+        #{screening.white_protein},
+        #{screening.circle_protein},
+        #{screening.whilte_circle_per},
+        #{screening.aminotransferase},
+        #{screening.all_bilirubin},
+        #{screening.dir_bilirubin},
+        #{screening.no_bilirubin},
+        #{screening.glomerulus_per},
+        #{screening.jigan},
+        #{screening.niaosu},
+        #{screening.niaoshuan},
+        #{screening.glycerol},
+        #{screening.all_cholesterol},
+        #{screening.high_protein},
+        #{screening.no_glucose},
+        #{screening.jia},
+        #{screening.na},
+        #{screening.lv}
+        )
+    </insert>
+    <update id="update">
+        UPDATE `t_screening`
+        SET
+            `total_protein` = #{screening.total_protein}
+
+            ,`white_protein` = #{screening.white_protein}
+
+            ,`circle_protein` = #{screening.circle_protein}
+
+            ,`whilte_circle_per` = #{screening.whilte_circle_per}
+
+            ,`aminotransferase` = #{screening.aminotransferase}
+
+            ,`all_bilirubin` = #{screening.all_bilirubin}
+
+            ,`dir_bilirubin` = #{screening.dir_bilirubin}
+
+            ,`no_bilirubin` = #{screening.no_bilirubin}
+
+            ,`glomerulus_per` = #{screening.glomerulus_per}
+
+            ,`jigan` = #{screening.jigan}
+
+            ,`niaosu` = #{screening.niaosu}
+
+            ,`niaoshuan` = #{screening.niaoshuan}
+
+            ,`glycerol` = #{screening.glycerol}
+
+            ,`all_cholesterol` = #{screening.all_cholesterol}
+
+            ,`high_protein` = #{screening.high_protein}
+
+            ,`no_glucose` = #{screening.no_glucose}
+
+            ,`jia` = #{screening.jia}
+
+            ,`na` = #{screening.na}
+
+            ,`lv` = #{screening.lv}
+        WHERE
+        (`id` =${screening.id});
+    </update>
+    <delete id="deleteScreeningById">
+        <!---->
+        DELETE
+        FROM
+        t_screening
+        WHERE
+        id = #{screening.id}
+    </delete>
+    <delete id="deleteScreeningByCheckId">
+        <!---->
+        DELETE
+        FROM
+        t_screening
+        WHERE
+        check_id = #{checkId}
+    </delete>
+</mapper>
+

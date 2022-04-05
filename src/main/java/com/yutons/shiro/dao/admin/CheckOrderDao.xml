@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.CheckOrderDao">
+    <select id="selectCheckOrderById" resultType="com.yutons.shiro.bean.admin.CheckOrder">
+        <!---->
+        SELECT
+        co.id,
+        co.hospital,
+        co.date,
+        co.medicial,
+        co.fd_gov,
+        co.fd_self
+        FROM
+        t_check_order co
+        where 1=1
+        <if test="checkOrder.id != null">
+           and co.id = #{checkOrder.id}
+        </if>
+    </select>
+    <select id="selectCheckOrderByCondition" resultType="com.yutons.shiro.bean.admin.CheckOrder">
+        <!---->
+        SELECT
+        co.id,
+        co.hospital,
+        co.date,
+        co.medicial,
+        co.fd_gov,
+        co.fd_self
+        FROM
+        t_check_order co
+        where 1=1
+        LIMIT ${(checkOrder.page-1)*checkOrder.limit},
+        ${checkOrder.limit}
+    </select>
+    <select id="selectCheckOrderCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
+        FROM
+        t_check_order co
+        where 1=1
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="checkOrder.id">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `t_check_order` (
+        hospital,
+        `date`,
+        medicial,
+        fd_gov,
+        fd_self
+        )
+        VALUES
+        (
+        #{checkOrder.hospital},
+        #{checkOrder.date},
+        #{checkOrder.medicial},
+        #{checkOrder.fd_gov},
+        #{checkOrder.fd_self}
+        )
+    </insert>
+    <update id="update">
+        UPDATE `t_check_order`
+        SET
+            `hospital` = #{checkOrder.hospital}
+            ,`date` = #{checkOrder.date}
+            ,`medicial` = #{checkOrder.medicial}
+            ,`fd_gov` = #{checkOrder.fd_gov}
+            ,`fd_self` = #{checkOrder.fd_self}
+        WHERE
+        (`id` =${checkOrder.id});
+    </update>
+    <delete id="deleteCheckOrderById">
+        <!---->
+        DELETE
+        FROM
+        t_check_order
+        WHERE
+        id = #{checkOrder.id}
+    </delete>
+
+    <select id="selectUnBindCheckOrder" resultType="com.yutons.shiro.bean.admin.CheckOrder">
+        <!---->
+        SELECT
+        *
+        FROM
+        t_check_order co
+        where not exists (select 1 from ${tableName} tb where tb.check_id = co.id);
+    </select>
+</mapper>
+

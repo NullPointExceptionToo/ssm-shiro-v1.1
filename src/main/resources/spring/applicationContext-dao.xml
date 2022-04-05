@@ -56,7 +56,7 @@
 		<!-- 配置 MyBatis 全局配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<!-- 配置pojo别名 -->
-		<property name="typeAliasesPackage" value="com.yutons.shiro.bean" />
+		<property name="typeAliasesPackage" value="com.yutons.shiro.bean.admin" />
 		<!-- 扫描 sql 配置文件，即 mapper 对应的 xml 文件 -->
 		<!-- <property name="mapperLocations" value="classpath:mappers/*.xml"/> -->
 		<!-- 扫描 entity 包，这样在 mapper 中就可以使用简单类名，多个用 ; 隔开 -->
@@ -68,7 +68,7 @@
 		写在此包下即可被扫描到 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 给出须要被扫描的 Dao 接口 -->
-		<property name="basePackage" value="com.yutons.shiro.dao" />
+		<property name="basePackage" value="com.yutons.shiro.dao.admin" />
 		<!-- 注入 SqlSessionFactory -->
 		<!-- 这是推荐配置的项，不要去配置 sqlSessionFactory ，已经被弃用了 -->
 		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" 

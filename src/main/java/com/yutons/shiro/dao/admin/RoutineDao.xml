@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.RoutineDao">
+    <select id="selectRoutineById" resultType="com.yutons.shiro.bean.admin.quota.Routine">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.white_count,
+        co.mid_cell_percent,
+        co.lb_cell_percent,
+        co.singo_cell_percent,
+        co.shuan_cell_percent,
+        co.jian_cell_percent,
+        co.mid_cell,
+        co.lb_cell,
+        co.singo_cell,
+        co.shuan_cell,
+        co.jian_cell,
+        co.red_count,
+        co.hemoglobin,
+        co.red_cell_jy,
+        co.ave_red_cell_lv,
+        co.ave_hemoglobin_per,
+        co.ave_hemoglobin_lev,
+        co.red_cell_width,
+        co.platelet_count,
+        co.platelet_jy,
+        co.ave_platelet_lv
+        FROM
+        t_routine co
+        where 1=1
+        <if test="routine.id != null">
+           and co.id = #{routine.id}
+        </if>
+    </select>
+    <select id="selectRoutineByCondition" resultType="com.yutons.shiro.bean.admin.quota.Routine">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.white_count,
+        co.mid_cell_percent,
+        co.lb_cell_percent,
+        co.singo_cell_percent,
+        co.shuan_cell_percent,
+        co.jian_cell_percent,
+        co.mid_cell,
+        co.lb_cell,
+        co.singo_cell,
+        co.shuan_cell,
+        co.jian_cell,
+        co.red_count,
+        co.hemoglobin,
+        co.red_cell_jy,
+        co.ave_red_cell_lv,
+        co.ave_hemoglobin_per,
+        co.ave_hemoglobin_lev,
+        co.red_cell_width,
+        co.platelet_count,
+        co.platelet_jy,
+        co.ave_platelet_lv
+        FROM
+        t_routine co
+        where 1=1
+        <if test="routine.check_id != null">
+           and co.check_id = #{routine.check_id}
+        </if>
+        LIMIT ${(routine.page-1)*routine.limit},
+        ${routine.limit}
+    </select>
+    <select id="selectRoutineCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
+        FROM
+        t_routine co
+        where 1=1
+        <if test="routine.check_id != null">
+            and co.check_id = #{routine.check_id}
+        </if>
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="routine.id">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `t_routine` (
+        check_id,
+        white_count,
+        mid_cell_percent,
+        lb_cell_percent,
+        singo_cell_percent,
+        shuan_cell_percent,
+        jian_cell_percent,
+        mid_cell,
+        lb_cell,
+        singo_cell,
+        shuan_cell,
+        jian_cell,
+        red_count,
+        hemoglobin,
+        red_cell_jy,
+        ave_red_cell_lv,
+        ave_hemoglobin_per,
+        ave_hemoglobin_lev,
+        red_cell_width,
+        platelet_count,
+        platelet_jy,
+        ave_platelet_lv
+        )
+        VALUES
+        (
+        #{routine.check_id},
+        #{routine.white_count},
+        #{routine.mid_cell_percent},
+        #{routine.lb_cell_percent},
+        #{routine.singo_cell_percent},
+        #{routine.shuan_cell_percent},
+        #{routine.jian_cell_percent},
+        #{routine.mid_cell},
+        #{routine.lb_cell},
+        #{routine.singo_cell},
+        #{routine.shuan_cell},
+        #{routine.jian_cell},
+        #{routine.red_count},
+        #{routine.hemoglobin},
+        #{routine.red_cell_jy},
+        #{routine.ave_red_cell_lv},
+        #{routine.ave_hemoglobin_per},
+        #{routine.ave_hemoglobin_lev},
+        #{routine.red_cell_width},
+        #{routine.platelet_count},
+        #{routine.platelet_jy},
+        #{routine.ave_platelet_lv}
+        )
+    </insert>
+    <update id="update">
+        UPDATE `t_routine`
+        SET
+            `white_count` = #{routine.white_count}
+
+            ,`mid_cell_percent` = #{routine.mid_cell_percent}
+
+            ,`lb_cell_percent` = #{routine.lb_cell_percent}
+
+            ,`singo_cell_percent` = #{routine.singo_cell_percent}
+
+            ,`shuan_cell_percent` = #{routine.shuan_cell_percent}
+
+            ,`jian_cell_percent` = #{routine.jian_cell_percent}
+
+            ,`mid_cell` = #{routine.mid_cell}
+
+            ,`lb_cell` = #{routine.lb_cell}
+
+            ,`singo_cell` = #{routine.singo_cell}
+
+            ,`shuan_cell` = #{routine.shuan_cell}
+
+            ,`jian_cell` = #{routine.jian_cell}
+
+            ,`red_count` = #{routine.red_count}
+
+            ,`hemoglobin` = #{routine.hemoglobin}
+
+            ,`red_cell_jy` = #{routine.red_cell_jy}
+
+            ,`ave_red_cell_lv` = #{routine.ave_red_cell_lv}
+
+            ,`ave_hemoglobin_per` = #{routine.ave_hemoglobin_per}
+
+            ,`ave_hemoglobin_lev` = #{routine.ave_hemoglobin_lev}
+
+            ,`red_cell_width` = #{routine.red_cell_width}
+
+            ,`platelet_count` = #{routine.platelet_count}
+
+            ,`platelet_jy` = #{routine.platelet_jy}
+
+            ,`ave_platelet_lv` = #{routine.ave_platelet_lv}
+        WHERE
+        (`id` =${routine.id});
+    </update>
+    <delete id="deleteRoutineById">
+        <!---->
+        DELETE
+        FROM
+        t_routine
+        WHERE
+        id = #{routine.id}
+    </delete>
+    <delete id="deleteRoutineByCheckId">
+        <!---->
+        DELETE
+        FROM
+        t_routine
+        WHERE
+        check_id = #{checkId}
+    </delete>
+</mapper>
+

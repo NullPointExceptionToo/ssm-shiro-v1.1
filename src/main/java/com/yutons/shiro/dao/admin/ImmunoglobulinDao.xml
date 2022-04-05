@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.ImmunoglobulinDao">
+    <select id="selectImmunoglobulinById" resultType="com.yutons.shiro.bean.admin.quota.Immunoglobulin">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.bt_c3,
+        co.bt_c4,
+        co.m_protein,
+        co.a_protein,
+        co.g_protein
+        FROM
+        t_immunoglobulin co
+        where 1=1
+        <if test="immunoglobulin.id != null">
+           and co.id = #{immunoglobulin.id}
+        </if>
+    </select>
+    <select id="selectImmunoglobulinByCondition" resultType="com.yutons.shiro.bean.admin.quota.Immunoglobulin">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.bt_c3,
+        co.bt_c4,
+        co.m_protein,
+        co.a_protein,
+        co.g_protein
+        FROM
+        t_immunoglobulin co
+        where 1=1
+        <if test="immunoglobulin.check_id != null">
+           and co.check_id = #{immunoglobulin.check_id}
+        </if>
+        LIMIT ${(immunoglobulin.page-1)*immunoglobulin.limit},
+        ${immunoglobulin.limit}
+    </select>
+    <select id="selectImmunoglobulinCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
+        FROM
+        t_immunoglobulin co
+        where 1=1
+        <if test="immunoglobulin.check_id != null">
+            and co.check_id = #{immunoglobulin.check_id}
+        </if>
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="immunoglobulin.id">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `t_immunoglobulin` (
+        check_id,
+        bt_c3,
+        bt_c4,
+        m_protein,
+        a_protein,
+        g_protein
+        )
+        VALUES
+        (
+        #{immunoglobulin.check_id},
+        #{immunoglobulin.bt_c3},
+        #{immunoglobulin.bt_c4},
+        #{immunoglobulin.m_protein},
+        #{immunoglobulin.a_protein},
+        #{immunoglobulin.g_protein}
+        )
+    </insert>
+    <update id="update">
+        UPDATE `t_immunoglobulin`
+        SET
+            `bt_c3` = #{immunoglobulin.bt_c3}
+
+            ,`bt_c4` = #{immunoglobulin.bt_c4}
+
+            ,`m_protein` = #{immunoglobulin.m_protein}
+
+            ,`a_protein` = #{immunoglobulin.a_protein}
+
+            ,`g_protein` = #{immunoglobulin.g_protein}
+        WHERE
+        (`id` =${immunoglobulin.id});
+    </update>
+    <delete id="deleteImmunoglobulinById">
+        <!---->
+        DELETE
+        FROM
+        t_immunoglobulin
+        WHERE
+        id = #{immunoglobulin.id}
+    </delete>
+    <delete id="deleteImmunoglobulinByCheckId">
+        <!---->
+        DELETE
+        FROM
+        t_immunoglobulin
+        WHERE
+        check_id = #{checkId}
+    </delete>
+</mapper>
+

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.TesrDao">
+    <select id="selectTesrById" resultType="com.yutons.shiro.bean.admin.quota.Tesr">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.esr
+        FROM
+        t_esr co
+        where 1=1
+        <if test="tesr.id != null">
+           and co.id = #{tesr.id}
+        </if>
+    </select>
+    <select id="selectTesrByCondition" resultType="com.yutons.shiro.bean.admin.quota.Tesr">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.esr
+        FROM
+        t_esr co
+        where 1=1
+        <if test="tesr.check_id != null">
+           and co.check_id = #{tesr.check_id}
+        </if>
+        LIMIT ${(tesr.page-1)*tesr.limit},
+        ${tesr.limit}
+    </select>
+    <select id="selectTesrCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
+        FROM
+        t_esr co
+        where 1=1
+        <if test="tesr.check_id != null">
+            and co.check_id = #{tesr.check_id}
+        </if>
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="tesr.id">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `t_esr` (
+        `check_id`,
+        `esr`
+        )
+        VALUES
+        (
+        #{tesr.check_id},
+        #{tesr.esr}
+        )
+    </insert>
+    <update id="update">
+        UPDATE `t_esr`
+        SET
+        `esr` = #{tesr.esr}
+        WHERE
+        (`id` =${tesr.id});
+    </update>
+    <delete id="deleteTesrById">
+        <!---->
+        DELETE
+        FROM
+        t_esr
+        WHERE
+        id = #{tesr.id}
+    </delete>
+    <delete id="deleteTesrByCheckId">
+        <!---->
+        DELETE
+        FROM
+        t_esr
+        WHERE
+        check_id = #{checkId}
+    </delete>
+</mapper>
+

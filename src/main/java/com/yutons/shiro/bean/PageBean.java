@@ -13,6 +13,6 @@ import lombok.extern.log4j.Log4j;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PageBean {
-    protected Integer page;//页码
-    protected Integer limit;//当页总条数
+    protected Integer page = 1;//页码
+    protected Integer limit = 10;//当页总条数
 }

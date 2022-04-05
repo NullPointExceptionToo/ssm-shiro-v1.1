@@ -24,21 +24,33 @@ public class Constans {
 	
 	
 	/**
-	 * 订单状态
+	 * 表名
 	 */
-	public static class State{
+	public static class TableName{
 		/**
-		 * 待配送
+		 * tser
 		 */
-		public static final Integer STATE_WAIT_DELIEVE = 1;
+		public static final String TESR = "t_esr";
 		/**
-		 * 配送
+		 * immunoglobulin
 		 */
-		public static final Integer STATE_DELIEVE = 2;
+		public static final String IMMUNOGLOBULIN = "t_immunoglobulin";
 		/**
-		 * 撤销
+		 * protein
 		 */
-		public static final Integer STATE_CANCEL = 0;
+		public static final String PROTEIN = "t_protein";
+		/**
+		 * routine
+		 */
+		public static final String ROUTINE = "t_routine";
+		/**
+		 * screening
+		 */
+		public static final String SCREENING = "t_screening";
+		/**
+		 * urinalysis
+		 */
+		public static final String URINALYSIS = "t_urinalysis";
 	}
 
 }

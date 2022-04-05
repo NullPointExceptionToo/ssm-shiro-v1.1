@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.UrinalysisDao">
+    <select id="selectUrinalysisById" resultType="com.yutons.shiro.bean.admin.quota.Urinalysis">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.occult_blood,
+        co.leucocyte_esterase,
+        co.protein,
+        co.bilirubin,
+        co.ketone,
+        co.urobilinogen,
+        co.nitrite,
+        co.glucose,
+        co.pH,
+        co.levhigh,
+        co.hun_lev,
+        co.color,
+        co.red_cell,
+        co.white_cell,
+        co.tube,
+        co.up_cell,
+        co.bacteria,
+        co.crystal,
+        co.filament,
+        co.class_bact
+        FROM
+        t_urinalysis co
+        where 1=1
+        <if test="urinalysis.id != null">
+           and co.id = #{urinalysis.id}
+        </if>
+    </select>
+    <select id="selectUrinalysisByCondition" resultType="com.yutons.shiro.bean.admin.quota.Urinalysis">
+        <!---->
+        SELECT
+        co.id,
+        co.check_id,
+        co.occult_blood,
+        co.leucocyte_esterase,
+        co.protein,
+        co.bilirubin,
+        co.ketone,
+        co.urobilinogen,
+        co.nitrite,
+        co.glucose,
+        co.pH,
+        co.levhigh,
+        co.hun_lev,
+        co.color,
+        co.red_cell,
+        co.white_cell,
+        co.tube,
+        co.up_cell,
+        co.bacteria,
+        co.crystal,
+        co.filament,
+        co.class_bact
+        FROM
+        t_urinalysis co
+        where 1=1
+        <if test="urinalysis.check_id != null">
+           and co.check_id = #{urinalysis.check_id}
+        </if>
+        LIMIT ${(urinalysis.page-1)*urinalysis.limit},
+        ${urinalysis.limit}
+    </select>
+    <select id="selectUrinalysisCountByCondition" resultType="java.lang.Integer">
+        <!---->
+        SELECT
+        count(1)
+        FROM
+        t_urinalysis co
+        where 1=1
+        <if test="urinalysis.check_id != null">
+            and co.check_id = #{urinalysis.check_id}
+        </if>
+    </select>
+    <insert id="insert">
+        <!---->
+        <selectKey resultType="integer" order="AFTER" keyProperty="urinalysis.id">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO `t_urinalysis` (
+        check_id,
+        occult_blood,
+        leucocyte_esterase,
+        protein,
+        bilirubin,
+        ketone,
+        urobilinogen,
+        nitrite,
+        glucose,
+        pH,
+        levhigh,
+        hun_lev,
+        color,
+        red_cell,
+        white_cell,
+        tube,
+        up_cell,
+        bacteria,
+        crystal,
+        filament,
+        class_bact
+        )
+        VALUES
+        (
+        #{urinalysis.check_id},
+        #{urinalysis.occult_blood},
+        #{urinalysis.leucocyte_esterase},
+        #{urinalysis.protein},
+        #{urinalysis.bilirubin},
+        #{urinalysis.ketone},
+        #{urinalysis.urobilinogen},
+        #{urinalysis.nitrite},
+        #{urinalysis.glucose},
+        #{urinalysis.pH},
+        #{urinalysis.levhigh},
+        #{urinalysis.hun_lev},
+        #{urinalysis.color},
+        #{urinalysis.red_cell},
+        #{urinalysis.white_cell},
+        #{urinalysis.tube},
+        #{urinalysis.up_cell},
+        #{urinalysis.bacteria},
+        #{urinalysis.crystal},
+        #{urinalysis.filament},
+        #{urinalysis.class_bact}
+        )
+    </insert>
+    <update id="update">
+        UPDATE `t_urinalysis`
+        SET
+            `occult_blood` = #{urinalysis.occult_blood}
+
+            ,`leucocyte_esterase` = #{urinalysis.leucocyte_esterase}
+
+            ,`protein` = #{urinalysis.protein}
+
+            ,`bilirubin` = #{urinalysis.bilirubin}
+
+            ,`ketone` = #{urinalysis.ketone}
+
+            ,`urobilinogen` = #{urinalysis.urobilinogen}
+
+            ,`nitrite` = #{urinalysis.nitrite}
+
+            ,`glucose` = #{urinalysis.glucose}
+
+            ,`pH` = #{urinalysis.pH}
+
+            ,`levhigh` = #{urinalysis.levhigh}
+
+            ,`hun_lev` = #{urinalysis.hun_lev}
+
+            ,`color` = #{urinalysis.color}
+
+            ,`red_cell` = #{urinalysis.red_cell}
+
+            ,`white_cell` = #{urinalysis.white_cell}
+
+            ,`tube` = #{urinalysis.tube}
+
+            ,`up_cell` = #{urinalysis.up_cell}
+
+            ,`bacteria` = #{urinalysis.bacteria}
+
+            ,`crystal` = #{urinalysis.crystal}
+
+            ,`filament` = #{urinalysis.filament}
+
+            ,`class_bact` = #{urinalysis.class_bact}
+        WHERE
+        (`id` =${urinalysis.id});
+    </update>
+    <delete id="deleteUrinalysisById">
+        <!---->
+        DELETE
+        FROM
+        t_urinalysis
+        WHERE
+        id = #{urinalysis.id}
+    </delete>
+    <delete id="deleteUrinalysisByCheckId">
+        <!---->
+        DELETE
+        FROM
+        t_urinalysis
+        WHERE
+        check_id = #{checkId}
+    </delete>
+</mapper>
+

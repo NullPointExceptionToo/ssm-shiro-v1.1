@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>农贸系统</title>
+    <title>阿宝健康监测系统</title>
     <link rel="Bookmark" href="${pageContext.request.contextPath}/resources/image/favicon.ico">
     <link rel="Shortcut Icon" href="${pageContext.request.contextPath}/resources/image/favicon.ico"/>
     <link href="${pageContext.request.contextPath}/resources/login/css/style.css" type="text/css" rel="stylesheet"/>
@@ -17,7 +17,7 @@
 <body>
 <div class="wrap">
     <div class="logo">
-        <span class="logo-sub">农贸系统</span>
+        <span class="logo-sub">阿宝健康监测系统</span>
     </div>
     <div class="banner-show" id="js_ban_content" style="margin-top: 5px;">
 
@@ -35,7 +35,7 @@
                 <span style="color: red">${msg}</span>
                 <div class="cell">
                     <span class="icon user"></span>
-                    <input type="text" name="username" id="username" tabindex="1" class="text" style="height: 40px;width: 291px" maxlength="20" value="" placeholder="工号"/>
+                    <input type="text" name="username" id="username" tabindex="1" class="text" style="height: 40px;width: 291px" maxlength="20" value="" placeholder="账号"/>
                 </div>
                 <div class="cell">
                     <span class="icon password"></span>

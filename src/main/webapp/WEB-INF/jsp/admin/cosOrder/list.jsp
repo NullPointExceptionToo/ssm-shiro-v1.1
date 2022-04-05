@@ -178,7 +178,7 @@
             $("#msg").text("");
         }
         
-      //时间戳的处理
+        //时间戳的处理
         layui.laytpl.toDateString = function(d, format){
          var date = new Date(d || new Date()),
          ymd = [
