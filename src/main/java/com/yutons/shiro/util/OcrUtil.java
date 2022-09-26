@@ -75,6 +75,9 @@ public class OcrUtil {
                 String[] split = code.split("\\.");
                 if(split.length > 0) {
                     code = split[0];
+                    if(!StringUtils.isEmpty(code) && code.charAt(0) == '*') {
+                        code = code.substring(1);
+                    }
                 }
                 String key = quotaMap.get(code);
                 if(!StringUtils.isEmpty(key)) {

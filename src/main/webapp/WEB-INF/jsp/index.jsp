@@ -154,25 +154,26 @@
         </div>
     </div>
 </section>
-<canvas width="1366" height="550" style="position: fixed; top: 0px; left: 0px; pointer-events: none; z-index: 999999;"></canvas>
-<div class="waifu" style="z-index:999">
-    <div class="waifu-tips"></div>
-    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
-    <div class="waifu-tool">
-        <span class="fui-home"></span>
-        <span class="fui-chat"></span>
-        <span class="fui-eye"></span>
-        <span class="fui-user"></span>
-        <span class="fui-photo"></span>
-        <span class="fui-info-circle"></span>
-        <span class="fui-cross"></span>
+<c:if test="${not isMobile}">
+    <canvas width="1366" height="550" style="position: fixed; top: 0px; left: 0px; pointer-events: none; z-index: 999999;"></canvas>
+    <div class="waifu" style="z-index:999">
+        <div class="waifu-tips"></div>
+        <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+        <div class="waifu-tool">
+            <span class="fui-home"></span>
+            <span class="fui-chat"></span>
+            <span class="fui-eye"></span>
+            <span class="fui-user"></span>
+            <span class="fui-photo"></span>
+            <span class="fui-info-circle"></span>
+            <span class="fui-cross"></span>
+        </div>
     </div>
-</div>
 
-<script src="${pageContext.request.contextPath}/resources/assets/waifu-tips.js"></script>
-<script src="${pageContext.request.contextPath}/resources/assets/live2d.js"></script>
-<script type="text/javascript">initModel("${pageContext.request.contextPath}/resources/assets/")</script>
-
+    <script src="${pageContext.request.contextPath}/resources/assets/waifu-tips.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/live2d.js"></script>
+    <script type="text/javascript">initModel("${pageContext.request.contextPath}/resources/assets/")</script>
+</c:if>
 <div class="contextMenu" id="Huiadminmenu">
     <ul>
         <li id="closethis">关闭当前</li>

@@ -61,67 +61,82 @@
 </script>
 
 <script type="text/html" id="timeTpl1">
-    <div {{# if(d.total_protein.upOrDown == 1 || d.total_protein.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.total_protein.value}}
-    {{#  if(d.total_protein.upOrDown == 1){ }}
-    <i class="layui-icon">&#xe619;</i>
-    {{# }}}
-    {{#  if(d.total_protein.upOrDown == -1){ }}
-    <i class="layui-icon">&#xe61a;</i>
-    {{# }}}
-    {{#  if(d.total_protein.upOrDown == 0){ }}
-    <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.total_protein.upOrDown == 1 || d.total_protein.upOrDown == -1){ }} style="color: red" {{# }}}>
+    {{# if(d.total_protein.value != -1.0){ }}
+        {{d.total_protein.value}}
+        {{#  if(d.total_protein.upOrDown == 1){ }}
+        <i class="layui-icon">&#xe619;</i>
+        {{# }}}
+        {{#  if(d.total_protein.upOrDown == -1){ }}
+        <i class="layui-icon">&#xe61a;</i>
+        {{# }}}
+        {{#  if(d.total_protein.upOrDown == 0){ }}
+        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+        {{# }}}
     {{# }}}
     </div>
 </script>
 <script type="text/html" id="timeTpl2">
-    <div {{# if(d.white_protein.upOrDown == 1 || d.white_protein.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.white_protein.value}}
-        {{#  if(d.white_protein.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.white_protein.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.white_protein.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.white_protein.upOrDown == 1 || d.white_protein.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.white_protein.value != -1.0){ }}
+            {{d.white_protein.value}}
+            {{#  if(d.white_protein.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.white_protein.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.white_protein.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>
 <script type="text/html" id="timeTpl3">
-    <div {{# if(d.circle_protein.upOrDown == 1 || d.circle_protein.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.circle_protein.value}}
-        {{#  if(d.circle_protein.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.circle_protein.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.circle_protein.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.circle_protein.upOrDown == 1 || d.circle_protein.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.circle_protein.value != -1.0){ }}
+            {{d.circle_protein.value}}
+            {{#  if(d.circle_protein.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.circle_protein.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.circle_protein.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>
 <script type="text/html" id="timeTpl4">
-    <div {{# if(d.jigan.upOrDown == 1 || d.jigan.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.jigan.value}}
-        {{#  if(d.jigan.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.jigan.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.jigan.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.jigan.upOrDown == 1 || d.jigan.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.jigan.value != -1.0){ }}
+            {{d.jigan.value}}
+            {{#  if(d.jigan.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.jigan.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.jigan.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>
 <script type="text/html" id="timeTpl5">
-    <div {{# if(d.glycerol.upOrDown == 1 || d.glycerol.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.glycerol.value}}
-        {{#  if(d.glycerol.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.glycerol.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.glycerol.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.glycerol.upOrDown == 1 || d.glycerol.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.glycerol.value != -1.0){ }}
+            {{d.glycerol.value}}
+            {{#  if(d.glycerol.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.glycerol.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.glycerol.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>

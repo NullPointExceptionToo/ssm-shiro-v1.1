@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BtC4 extends BaseQuota {
     {
-        upLimit = 140.0;
-        downLimit = 70.0;
+        upLimit = 40.0;
+        downLimit = 10.0;
         name = "补体C4";
         unit = "mg/dL";
     }

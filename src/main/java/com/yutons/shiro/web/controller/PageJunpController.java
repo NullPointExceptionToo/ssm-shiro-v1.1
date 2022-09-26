@@ -3,6 +3,7 @@ package com.yutons.shiro.web.controller;
 import com.yutons.shiro.bean.admin.Permission;
 import com.yutons.shiro.bean.admin.User;
 import com.yutons.shiro.service.admin.UserService;
+import com.yutons.shiro.util.DeviceUtil;
 import com.yutons.shiro.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -31,12 +33,13 @@ public class PageJunpController {
      * @return
      */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest request) {
         //获取用户信息
         User user = TokenUtil.getUser();
         Integer userId = user.getId();
         List<List<Permission>> list= userService.selectMenusByUserId(userId);
-        //System.out.println(list);
+        boolean isMobile = DeviceUtil.isMobileEdvice(request.getHeader("User-Agent"));
+        model.addAttribute("isMobile", isMobile);
         model.addAttribute("list", list);
         return "index";
     }

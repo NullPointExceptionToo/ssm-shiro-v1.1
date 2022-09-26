@@ -59,14 +59,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">总蛋白</label>
                         <div class="layui-input-block">
-                            <input type="text" name="total_protein" lay-verify="digital|required" placeholder="总蛋白(g/L)"
+                            <input type="text" name="total_protein" lay-verify="digital" placeholder="总蛋白(g/L)"
                                    class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">尿素</label>
                         <div class="layui-input-block">
-                            <input type="text" name="niaosu" lay-verify="digital|required" placeholder="尿素(mmol/L)"
+                            <input type="text" name="niaosu" lay-verify="digital" placeholder="尿素(mmol/L)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -75,14 +75,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">白蛋白</label>
                         <div class="layui-input-block">
-                            <input type="text" name="white_protein" lay-verify="digital|required" placeholder="白蛋白(g/L)"
+                            <input type="text" name="white_protein" lay-verify="digital" placeholder="白蛋白(g/L)"
                                    class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">尿酸</label>
                         <div class="layui-input-block">
-                            <input type="text" name="niaoshuan" lay-verify="digital|required" placeholder="尿酸(u mol/L)"
+                            <input type="text" name="niaoshuan" lay-verify="digital" placeholder="尿酸(u mol/L)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -91,14 +91,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">球蛋白</label>
                         <div class="layui-input-block">
-                            <input type="text" name="circle_protein" lay-verify="digital|required" placeholder="球蛋白(g/L)"
+                            <input type="text" name="circle_protein" lay-verify="digital" placeholder="球蛋白(g/L)"
                                    class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">甘油三醇</label>
                         <div class="layui-input-block">
-                            <input type="text" name="glycerol" lay-verify="digital|required" placeholder="甘油三醇(mmol/L)"
+                            <input type="text" name="glycerol" lay-verify="digital" placeholder="甘油三醇(mmol/L)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -107,14 +107,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">白球蛋白比例</label>
                         <div class="layui-input-block">
-                            <input type="text" name="whilte_circle_per" lay-verify="digital|required" placeholder="白球蛋白比例(%)"
+                            <input type="text" name="whilte_circle_per" lay-verify="digital" placeholder="白球蛋白比例(%)"
                                    class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">总胆固醇</label>
                         <div class="layui-input-block">
-                            <input type="text" name="all_cholesterol" lay-verify="digital|required" placeholder="总胆固醇(mmol/L)"
+                            <input type="text" name="all_cholesterol" lay-verify="digital" placeholder="总胆固醇(mmol/L)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -123,14 +123,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">谷丙转氨酶</label>
                         <div class="layui-input-block">
-                            <input type="text" name="aminotransferase" lay-verify="digital|required" placeholder="谷丙转氨酶(U/L)"
+                            <input type="text" name="aminotransferase" lay-verify="digital" placeholder="谷丙转氨酶(U/L)"
                                    class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">高密度脂蛋白-C</label>
                         <div class="layui-input-block">
-                            <input type="text" name="high_protein" lay-verify="digital|required" placeholder="高密度脂蛋白-C(mmol/L)"
+                            <input type="text" name="high_protein" lay-verify="digital" placeholder="高密度脂蛋白-C(mmol/L)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -139,14 +139,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">总胆红素</label>
                         <div class="layui-input-block">
-                            <input type="text" name="all_bilirubin" lay-verify="digital|required" placeholder="总胆红素(u mol/L)"
+                            <input type="text" name="all_bilirubin" lay-verify="digital" placeholder="总胆红素(u mol/L)"
                                    class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">空腹血糖</label>
                         <div class="layui-input-block">
-                            <input type="text" name="no_glucose" lay-verify="digital|required" placeholder="空腹血糖(mmol/L)"
+                            <input type="text" name="no_glucose" lay-verify="digital" placeholder="空腹血糖(mmol/L)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -155,14 +155,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">直接胆红素</label>
                         <div class="layui-input-block">
-                            <input type="text" name="dir_bilirubin" lay-verify="digital|required" placeholder="直接胆红素(u mol/L)"
+                            <input type="text" name="dir_bilirubin" lay-verify="digital" placeholder="直接胆红素(u mol/L)"
                                    class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">钾</label>
                         <div class="layui-input-block">
-                            <input type="text" name="jia" lay-verify="digital|required" placeholder="钾(mmol/L)"
+                            <input type="text" name="jia" lay-verify="digital" placeholder="钾(mmol/L)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -171,14 +171,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">间接胆红素</label>
                         <div class="layui-input-block">
-                            <input type="text" name="no_bilirubin" lay-verify="digital|required" placeholder="间接胆红素(u mol/L)"
+                            <input type="text" name="no_bilirubin" lay-verify="digital" placeholder="间接胆红素(u mol/L)"
                                    class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">钠</label>
                         <div class="layui-input-block">
-                            <input type="text" name="na" lay-verify="digital|required" placeholder="钠(mmol/L)"
+                            <input type="text" name="na" lay-verify="digital" placeholder="钠(mmol/L)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -187,14 +187,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">肾小球滤过率-cr</label>
                         <div class="layui-input-block">
-                            <input type="text" name="glomerulus_per" lay-verify="digital|required" placeholder="肾小球滤过率-cr(ml/min)"
+                            <input type="text" name="glomerulus_per" lay-verify="digital" placeholder="肾小球滤过率-cr(ml/min)"
                                    class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">氯</label>
                         <div class="layui-input-block">
-                            <input type="text" name="lv" lay-verify="digital|required" placeholder="氯(mmol/L)"
+                            <input type="text" name="lv" lay-verify="digital" placeholder="氯(mmol/L)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">肌酐</label>
                         <div class="layui-input-block">
-                            <input type="text" name="jigan" lay-verify="digital|required" placeholder="肌酐(u mol/L)"
+                            <input type="text" name="jigan" lay-verify="digital" placeholder="肌酐(u mol/L)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -284,6 +284,7 @@
                     }
                 },
                 error: function (data) {
+                    layer.close(loadIndex);
                     layer.msg('导入失败了呦，宝!', {icon:5});
                 }
 

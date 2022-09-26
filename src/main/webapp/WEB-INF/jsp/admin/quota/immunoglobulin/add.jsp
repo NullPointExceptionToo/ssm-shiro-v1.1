@@ -66,7 +66,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">免疫球蛋白A</label>
                         <div class="layui-input-block">
-                            <input type="text" name="a_protein" lay-verify="digital|required" placeholder="免疫球蛋白A(mg/dL)"
+                            <input type="text" name="a_protein" lay-verify="digital" placeholder="免疫球蛋白A(mg/dL)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">免疫球蛋白G</label>
                         <div class="layui-input-block">
-                            <input type="text" name="g_protein" lay-verify="digital|required" placeholder="免疫球蛋白G(mg/dL)"
+                            <input type="text" name="g_protein" lay-verify="digital" placeholder="免疫球蛋白G(mg/dL)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">免疫球蛋白M</label>
                         <div class="layui-input-block">
-                            <input type="text" name="m_protein" lay-verify="digital|required" placeholder="免疫球蛋白M(mg/dL)"
+                            <input type="text" name="m_protein" lay-verify="digital" placeholder="免疫球蛋白M(mg/dL)"
                                    class="layui-input">
                         </div>
                     </div>
@@ -172,6 +172,7 @@
                     }
                 },
                 error: function (data) {
+                    layer.close(loadIndex);
                     layer.msg('导入失败了呦，宝!', {icon:5});
                 }
 

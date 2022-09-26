@@ -1,20 +1,20 @@
 package com.yutons.shiro.web.controller.admin;
 
 import com.yutons.shiro.util.OcrUtil;
+import com.yutons.shiro.util.QuotaNameSelectionUtil;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 /**
  * @title: CommonController
@@ -38,5 +38,10 @@ public class CommonController {
             e.printStackTrace();
         }
         return obj;
+    }
+    @RequestMapping(value = "/checkTypeSelection/{checktype}", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, String> QuotaNameSelection(@PathVariable("checktype") String checktype) {
+        return QuotaNameSelectionUtil.typeMap.get(checktype);
     }
 }

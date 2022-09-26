@@ -64,6 +64,7 @@
                 <tr>
                     <td>${quota.name}</td>
                     <td <c:if test="${quota.upOrDown != 0}">style="color: red"</c:if>>
+                        <c:if test="${quota.upOrDown == 0 || quota.value != -1.0}">
                             ${quota.value}
                             <c:if test="${quota.upOrDown == 1}">
                                 <i class="layui-icon">&#xe619;</i>
@@ -71,6 +72,7 @@
                             <c:if test="${quota.upOrDown == -1}">
                                 <i class="layui-icon">&#xe61a;</i>
                             </c:if>
+                        </c:if>
                     </td>
                     <td><c:if test="${quota.downLimit != -1}">${quota.downLimit}</c:if>
                         --

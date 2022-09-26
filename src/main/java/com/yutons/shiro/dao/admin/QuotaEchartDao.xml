@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yutons.shiro.dao.admin.QuotaEchartDao">
+    <select id="getLeastQuota" resultType="com.yutons.shiro.bean.admin.QuotaEchart">
+        <!---->
+        SELECT
+        o.`date`,
+        o.hospital,
+        c.${column} as `value`
+        FROM
+        ${table} c left join t_check_order o on c.check_id = o.id
+        where c.${column} is not null and c.${column} != -1
+        order by o.`date` desc
+        <if test="timer != null and timer">
+            limit ${timer}
+        </if>
+    </select>
+</mapper>
+

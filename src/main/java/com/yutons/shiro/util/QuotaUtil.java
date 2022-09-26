@@ -26,8 +26,6 @@ public class QuotaUtil {
 				put("尿量","urine");
 				put("尿蛋白","urine_protein");
 				put("24小时尿蛋白","m_protein");
-				put("免疫球蛋白A","a_protein");
-				put("免疫球蛋白G","g_protein");
 			}
 		};
 		tesrMap = new HashMap<String,String>(){

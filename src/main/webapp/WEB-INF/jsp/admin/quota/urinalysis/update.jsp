@@ -123,7 +123,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">管型</label>
                         <div class="layui-input-block">
-                            <input type="text" name="tube" lay-verify="digital|required" placeholder="管型(/ul)"
+                            <input type="text" name="tube" lay-verify="digital" placeholder="管型(/ul)"
                                    value="${urinalysisVO.tube.value}"
                                    class="layui-input">
                         </div>
@@ -141,7 +141,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">上皮细胞</label>
                         <div class="layui-input-block">
-                            <input type="text" name="up_cell" lay-verify="digital|required" placeholder="上皮细胞(/ul)"
+                            <input type="text" name="up_cell" lay-verify="digital" placeholder="上皮细胞(/ul)"
                                    value="${urinalysisVO.up_cell.value}"
                                    class="layui-input">
                         </div>
@@ -159,7 +159,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">细菌</label>
                         <div class="layui-input-block">
-                            <input type="text" name="bacteria" lay-verify="digital|required" placeholder="细菌(/ul)"
+                            <input type="text" name="bacteria" lay-verify="digital" placeholder="细菌(/ul)"
                                    value="${urinalysisVO.bacteria.value}"
                                    class="layui-input">
                         </div>
@@ -187,7 +187,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">PH</label>
                         <div class="layui-input-block">
-                            <input type="text" name="pH" lay-verify="digital|required" placeholder="PH"
+                            <input type="text" name="pH" lay-verify="digital" placeholder="PH"
                                    value="${urinalysisVO.PH.value}"
                                    class="layui-input">
                         </div>
@@ -205,7 +205,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">比重</label>
                         <div class="layui-input-block">
-                            <input type="text" name="levhigh" lay-verify="digital|required" placeholder="比重"
+                            <input type="text" name="levhigh" lay-verify="digital" placeholder="比重"
                                    value="${urinalysisVO.levhigh.value}"
                                    class="layui-input">
                         </div>

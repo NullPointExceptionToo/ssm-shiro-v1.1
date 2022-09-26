@@ -59,35 +59,44 @@
 </script>
 
 <script type="text/html" id="timeTpl1">
-    <div>{{d.protein.value}}
-    {{#  if(d.protein.upOrDown == 0){ }}
-    <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div>
+    {{# if(d.protein.value != -1.0){ }}
+        {{d.protein.value}}
+        {{#  if(d.protein.upOrDown == 0){ }}
+        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+        {{# }}}
     {{# }}}
     </div>
 </script>
 <script type="text/html" id="timeTpl2">
-    <div {{# if(d.red_cell.upOrDown == 1 || d.red_cell.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.red_cell.value}}
-        {{#  if(d.red_cell.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.red_cell.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.red_cell.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.red_cell.upOrDown == 1 || d.red_cell.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.red_cell.value != -1.0){ }}
+            {{d.red_cell.value}}
+            {{#  if(d.red_cell.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.red_cell.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.red_cell.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>
 <script type="text/html" id="timeTpl3">
-    <div {{# if(d.white_cell.upOrDown == 1 || d.white_cell.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.white_cell.value}}
-        {{#  if(d.white_cell.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.white_cell.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.white_cell.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.white_cell.upOrDown == 1 || d.white_cell.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.white_cell.value != -1.0){ }}
+            {{d.white_cell.value}}
+            {{#  if(d.white_cell.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.white_cell.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.white_cell.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>

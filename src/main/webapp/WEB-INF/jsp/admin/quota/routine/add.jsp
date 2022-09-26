@@ -300,6 +300,7 @@
                     }
                 },
                 error: function (data) {
+                    layer.close(loadIndex);
                     layer.msg('导入失败了呦，宝!', {icon:5});
                 }
 

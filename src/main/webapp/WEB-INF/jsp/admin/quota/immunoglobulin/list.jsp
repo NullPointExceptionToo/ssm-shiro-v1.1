@@ -40,8 +40,8 @@
                 <thead>
                 <tr>
                     <th lay-data="{field:'id',align:'center', width:100, sort: true}">检查单ID</th>
-                    <th lay-data="{field:'bt_c3',align:'center', width:120, sort: true, templet: timeTpl1}">C3[10-40]</th>
-                    <th lay-data="{field:'bt_c4',align:'center', width:120, sort: true, templet: timeTpl2}">C4[70-140]</th>
+                    <th lay-data="{field:'bt_c3',align:'center', width:120, sort: true, templet: timeTpl1}">C3[70-140]</th>
+                    <th lay-data="{field:'bt_c4',align:'center', width:120, sort: true, templet: timeTpl2}">C4[10-40]</th>
                     <th lay-data="{field:'m_protein',align:'center', width:170, sort: true, templet: timeTpl3}">免疫球蛋白M[50-280]</th>
                     <th lay-data="{field:'a_protein',align:'center', width:170, sort: true, templet: timeTpl4}">免疫球蛋白A[100-420]</th>
                     <th lay-data="{field:'g_protein',align:'center', width:170, sort: true, templet: timeTpl5}">免疫球蛋白G[860-1740]</th>
@@ -61,67 +61,82 @@
 </script>
 
 <script type="text/html" id="timeTpl1">
-    <div {{# if(d.bt_c3.upOrDown == 1 || d.bt_c3.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.bt_c3.value}}
-        {{#  if(d.bt_c3.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.bt_c3.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.bt_c3.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.bt_c3.upOrDown == 1 || d.bt_c3.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.bt_c3.value != -1.0){ }}
+            {{d.bt_c3.value}}
+            {{#  if(d.bt_c3.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.bt_c3.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.bt_c3.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>
 <script type="text/html" id="timeTpl2">
-    <div {{# if(d.bt_c4.upOrDown == 1 || d.bt_c4.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.bt_c4.value}}
-        {{#  if(d.bt_c4.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.bt_c4.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.bt_c4.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.bt_c4.upOrDown == 1 || d.bt_c4.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.bt_c4.value != -1.0){ }}
+            {{d.bt_c4.value}}
+            {{#  if(d.bt_c4.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.bt_c4.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.bt_c4.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>
 <script type="text/html" id="timeTpl3">
-    <div {{# if(d.m_protein.upOrDown == 1 || d.m_protein.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.m_protein.value}}
-        {{#  if(d.m_protein.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.m_protein.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.m_protein.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.m_protein.upOrDown == 1 || d.m_protein.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.m_protein.value != -1.0){ }}
+            {{d.m_protein.value}}
+            {{#  if(d.m_protein.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.m_protein.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.m_protein.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>
 <script type="text/html" id="timeTpl4">
-    <div {{# if(d.a_protein.upOrDown == 1 || d.a_protein.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.a_protein.value}}
-        {{#  if(d.a_protein.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.a_protein.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.a_protein.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.a_protein.upOrDown == 1 || d.a_protein.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.a_protein.value != -1.0){ }}
+            {{d.a_protein.value}}
+            {{#  if(d.a_protein.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.a_protein.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.a_protein.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>
 <script type="text/html" id="timeTpl5">
-    <div {{# if(d.g_protein.upOrDown == 1 || d.g_protein.upOrDown == -1){ }} style="color: red" {{# }}}>{{d.g_protein.value}}
-        {{#  if(d.g_protein.upOrDown == 1){ }}
-        <i class="layui-icon">&#xe619;</i>
-        {{# }}}
-        {{#  if(d.g_protein.upOrDown == -1){ }}
-        <i class="layui-icon">&#xe61a;</i>
-        {{# }}}
-        {{#  if(d.g_protein.upOrDown == 0){ }}
-        <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <div {{# if(d.g_protein.upOrDown == 1 || d.g_protein.upOrDown == -1){ }} style="color: red" {{# }}}>
+        {{# if(d.g_protein.value != -1.0){ }}
+            {{d.g_protein.value}}
+            {{#  if(d.g_protein.upOrDown == 1){ }}
+            <i class="layui-icon">&#xe619;</i>
+            {{# }}}
+            {{#  if(d.g_protein.upOrDown == -1){ }}
+            <i class="layui-icon">&#xe61a;</i>
+            {{# }}}
+            {{#  if(d.g_protein.upOrDown == 0){ }}
+            <i class="layui-icon">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            {{# }}}
         {{# }}}
     </div>
 </script>
