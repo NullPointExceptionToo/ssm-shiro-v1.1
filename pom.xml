@@ -44,7 +44,7 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat8-maven-plugin</artifactId>
-                <version>2.2</version>
+                <version>3.0-r1655215</version>
                 <configuration>
                     <port>8888</port>
                     <uriEncoding>UTF-8</uriEncoding><!--配置编码格式-->
@@ -68,6 +68,9 @@
         <!-- log4j日志文件管理包版本 -->
         <slf4j.version>1.7.7</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
+<!--        <maven.compiler.target>1.8</maven.compiler.target>-->
+<!--        <maven.compiler.source>1.8</maven.compiler.source>-->
+
     </properties>
     <dependencies>
         <dependency>
@@ -343,7 +346,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.10</version>
+            <version>1.18.4</version>
         </dependency>
         <!--POI-->
         <dependency>
@@ -379,10 +382,8 @@
 
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
-            <artifactId>tencentcloud-sdk-java</artifactId>
-            <!-- go to https://search.maven.org/search?q=tencentcloud-sdk-java and get the latest version. -->
-            <!-- 请到https://search.maven.org/search?q=tencentcloud-sdk-java查询所有版本，最新版本如下 -->
-            <version>4.0.11</version>
+            <artifactId>tencentcloud-sdk-java-ocr</artifactId>
+            <version>3.1.702</version>
         </dependency>
         
     </dependencies>
